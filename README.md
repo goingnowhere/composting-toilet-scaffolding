@@ -22,7 +22,7 @@ The design should
 - Seperate liquid and solid waste to aid disposal. 
 - Ensure that human waste is sealed in order to prevent the spread of gastro intestinal infections.
 - Should be able to cope with expected volumes (to be determined) of liquid and solid matter
-– TODO More
+- TODO More
 
 ## Scaffolding Approach
 

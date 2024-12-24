@@ -6,7 +6,7 @@ import FreeCAD
 import FreeCADGui as Gui
 
 
-from make_fittings import make_side_outlet_t
+from make_fittings import Side_Outlet_T
 
 # Set Up Freecad and Select Workbench
 FreeCAD.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -17,5 +17,5 @@ Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
 # Draw a simple side outlet T object
-Fitting_1 = make_side_outlet_t(freecad_document = document,
+side_outlet_t_1 = Side_Outlet_T(freecad_document = document,
                                fitting_label = "Side_Outlet_T_1")

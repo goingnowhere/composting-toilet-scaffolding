@@ -29,88 +29,145 @@ def make_pole(line, name):
     pole.Label = name
     return pole
 
+class Side_Outlet_T:
+    """ A class representing a Side Outlet T fitting for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/side-outlet-tee-42mm-c42/  """
 
-def make_side_outlet_t(freecad_document,
-                       fitting_label,
-                       rotation = App.Rotation(0,0,0),
-                       centre = App.Vector(0,0,0)):
-    """ Draws a Side Outlet Tee with with the centerline of all poles intersecting
-    at the center parameter.
-    https://pipedreamfittings.com/product/side-outlet-tee-42mm-c42/ """
-    # Strategy draw all the outside tubes, place them in the correct location and rotation,
-    # then cut 48mm diameter solids
     distance_from_centre = 68
-    t_across_start = App.Vector( -distance_from_centre,0,0)
-    t_across_end = App.Vector(distance_from_centre,0,0)                           
-    t_across_line = Draft.make_line(t_across_start,t_across_end)
-    t_down_start = App.Vector(0, 0, -distance_from_centre)
-    t_down_end = App.Vector(0, 0, 0)
-    t_down_line = Draft.make_line(t_down_start,t_down_end)
-    through_distance_from_centre = joint_diameter/2
-    t_through_start = App.Vector(0, -through_distance_from_centre, 0)
-    t_through_end = App.Vector(0, through_distance_from_centre, 0)
-    t_through_line = Draft.make_line(t_through_start,t_through_end)
-    # Place the lines in the correct locations to take account of rotation and centre.
-    # t_across_line.Placement = App.Placement(t_across_line.Placement.Base, rotation, centre)
-    # t_down_line.Placement = App.Placement(t_down_line.Placement.Base, rotation, centre)
-    # t_through_line.Placement = App.Placement(t_through_line.Placement.Base, rotation, centre)
-    #Draw solid sections
-    t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
-    t_across.WallThickness = joint_wall_thickness
-    t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
-    t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
-    t_across = Draft.cut(t_across, t_through_inside)
-    t_across = Draft.cut(t_across, t_down_inside)
-    t_across.Label = "T_Across"
-    t_down = Arch.makePipe(t_down_line, diameter=joint_diameter)
-    t_down.WallThickness = joint_wall_thickness
-    t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
-    t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
-    t_down = Draft.cut(t_down, t_across_inside)
-    t_down = Draft.cut(t_down, t_through_inside)
-    t_down.Label = "T_Down"
-    t_through = Arch.makePipe(t_through_line, diameter=joint_diameter)
-    t_through.WallThickness = joint_wall_thickness
-    t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
-    t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
-    t_through = Draft.cut(t_through, t_across_inside)
-    t_through = Draft.cut(t_through, t_down_inside)
-    t_through.Label = "T_Through"
-    # Rotate solid sections around the orign
-    t_across.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-    t_down_base = t_down.Placement.Base
-    t_down.Placement = App.Placement(t_down.Placement.Base, rotation, App.Vector(0,0,0))
-    t_through.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-    # Move objects to defined centre
-    Draft.move(t_across, centre)
-    Draft.move(t_down, centre)
-    Draft.move(t_through, centre)
-    # Group sections
-    fitting = freecad_document.addObject("App::DocumentObjectGroup","Group")
-    fitting.addObject(t_across)
-    fitting.addObject(t_down)
-    fitting.addObject(t_through)
-    fitting.Label=fitting_label
-    return fitting
 
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Side Outlet Tee in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.
+        """
+        # Strategy draw all the outside tubes, place them in the correct location and rotation,
+        # then cut 48mm diameter solids
+        distance_from_centre = Side_Outlet_T.distance_from_centre
+        t_across_start = App.Vector( -distance_from_centre,0,0)
+        t_across_end = App.Vector(distance_from_centre,0,0)                           
+        t_across_line = Draft.make_line(t_across_start,t_across_end)
+        t_down_start = App.Vector(0, 0, -distance_from_centre)
+        t_down_end = App.Vector(0, 0, 0)
+        t_down_line = Draft.make_line(t_down_start,t_down_end)
+        through_distance_from_centre = joint_diameter/2
+        t_through_start = App.Vector(0, -through_distance_from_centre, 0)
+        t_through_end = App.Vector(0, through_distance_from_centre, 0)
+        t_through_line = Draft.make_line(t_through_start,t_through_end)
+        # Place the lines in the correct locations to take account of rotation and centre.
+        # t_across_line.Placement = App.Placement(t_across_line.Placement.Base, rotation, centre)
+        # t_down_line.Placement = App.Placement(t_down_line.Placement.Base, rotation, centre)
+        # t_through_line.Placement = App.Placement(t_through_line.Placement.Base, rotation, centre)
+        #Draw solid sections
+        t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
+        t_across.WallThickness = joint_wall_thickness
+        t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
+        t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
+        t_across = Draft.cut(t_across, t_through_inside)
+        t_across = Draft.cut(t_across, t_down_inside)
+        t_across.Label = "T_Across"
+        t_down = Arch.makePipe(t_down_line, diameter=joint_diameter)
+        t_down.WallThickness = joint_wall_thickness
+        t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
+        t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
+        t_down = Draft.cut(t_down, t_across_inside)
+        t_down = Draft.cut(t_down, t_through_inside)
+        t_down.Label = "T_Down"
+        t_through = Arch.makePipe(t_through_line, diameter=joint_diameter)
+        t_through.WallThickness = joint_wall_thickness
+        t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
+        t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
+        t_through = Draft.cut(t_through, t_across_inside)
+        t_through = Draft.cut(t_through, t_down_inside)
+        t_through.Label = "T_Through"
+        # Rotate solid sections around the orign
+        t_across.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        t_down_base = t_down.Placement.Base
+        t_down.Placement = App.Placement(t_down.Placement.Base, rotation, App.Vector(0,0,0))
+        t_through.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move objects to defined centre
+        Draft.move(t_across, centre)
+        Draft.move(t_down, centre)
+        Draft.move(t_through, centre)
+        # Group sections
+        self.fitting = freecad_document.addObject("App::DocumentObjectGroup","Group")
+        self.fitting.addObject(t_across)
+        self.fitting.addObject(t_down)
+        self.fitting.addObject(t_through)
+        self.fitting.Label=fitting_label
 
-
-
-
-
-# Draws a 48mm 4 Way Cross with with the centerline of all poles intersecting
-# at the centre parameter.
-# https://pipedreamfittings.com/product/4-way-cross-with-central-tube-48mm-d48/
-def draw_4_way_cross(center = App.Vector(0,0,0)):
-    App.Console.PrintMessage(" TODO 4 way cross mm\n")
-    #TODO code
-
-# # Set Up App and Select Workbench
-# App.Console.PrintMessage("Starting App generation.\n")
-# document = App.newDocument("Fittings")
-# Gui.activeDocument().activeView().viewDefaultOrientation()
-# Gui.runCommand('Std_OrthographicCamera',1)
-# Gui.activateWorkbench("BIMWorkbench21")
-
-# # TODO call joint drawing functions.
-# draw_side_outlet_t()
+class Four_Way_Cross:
+    """ A class representing a 4 way cross object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/4-way-cross-with-central-tube-48mm-d48/ """
+    
+    distance_from_centre = 68
+    through_long_distance = 49.5
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a 4 Way Cross in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Strategy draw all the outside tubes, place them in the correct location and rotation,
+        # then cut 48mm diameter solids
+        distance_from_centre = Four_Way_Cross.distance_from_centre
+        through_long_distance = Four_Way_Cross.through_long_distance
+        t_across_start = App.Vector( -distance_from_centre,0,0)
+        t_across_end = App.Vector(distance_from_centre,0,0)                           
+        t_across_line = Draft.make_line(t_across_start,t_across_end)
+        t_down_start = App.Vector(0, 0, -distance_from_centre)
+        t_down_end = App.Vector(0, 0, distance_from_centre)
+        t_down_line = Draft.make_line(t_down_start,t_down_end)
+        through_short_distance = joint_diameter/2
+        t_through_start = App.Vector(0, -through_long_distance, 0)
+        t_through_end = App.Vector(0, through_short_distance, 0)
+        t_through_line = Draft.make_line(t_through_start,t_through_end)
+        # Place the lines in the correct locations to take account of rotation and centre.
+        # t_across_line.Placement = App.Placement(t_across_line.Placement.Base, rotation, centre)
+        # t_down_line.Placement = App.Placement(t_down_line.Placement.Base, rotation, centre)
+        # t_through_line.Placement = App.Placement(t_through_line.Placement.Base, rotation, centre)
+        #Draw solid sections
+        t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
+        t_across.WallThickness = joint_wall_thickness
+        t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
+        t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
+        t_across = Draft.cut(t_across, t_through_inside)
+        t_across = Draft.cut(t_across, t_down_inside)
+        t_across.Label = "T_Across"
+        t_down = Arch.makePipe(t_down_line, diameter=joint_diameter)
+        t_down.WallThickness = joint_wall_thickness
+        t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
+        t_through_inside = Arch.makePipe(t_through_line, diameter=pole_diameter)
+        t_down = Draft.cut(t_down, t_across_inside)
+        t_down = Draft.cut(t_down, t_through_inside)
+        t_down.Label = "T_Down"
+        t_through = Arch.makePipe(t_through_line, diameter=joint_diameter)
+        t_through.WallThickness = joint_wall_thickness
+        t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
+        t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
+        t_through = Draft.cut(t_through, t_across_inside)
+        t_through = Draft.cut(t_through, t_down_inside)
+        t_through.Label = "T_Through"
+        # Rotate solid sections around the orign
+        t_across.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        t_down_base = t_down.Placement.Base
+        t_down.Placement = App.Placement(t_down.Placement.Base, rotation, App.Vector(0,0,0))
+        t_through.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move objects to defined centre
+        Draft.move(t_across, centre)
+        Draft.move(t_down, centre)
+        Draft.move(t_through, centre)
+        # Group sections
+        self.fitting = freecad_document.addObject("App::DocumentObjectGroup","Group")
+        self.fitting.addObject(t_across)
+        self.fitting.addObject(t_down)
+        self.fitting.addObject(t_through)
+        self.fitting.Label=fitting_label
