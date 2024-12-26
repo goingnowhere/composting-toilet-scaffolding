@@ -13,6 +13,7 @@ import Draft
 # import WorkingPlane
 # import App
 
+from BasicShapes import Shapes
 from parameters import *
 
 def display_variable(name, value):
@@ -58,10 +59,6 @@ class Side_Outlet_T:
         t_through_start = App.Vector(0, -through_distance_from_centre, 0)
         t_through_end = App.Vector(0, through_distance_from_centre, 0)
         t_through_line = Draft.make_line(t_through_start,t_through_end)
-        # Place the lines in the correct locations to take account of rotation and centre.
-        # t_across_line.Placement = App.Placement(t_across_line.Placement.Base, rotation, centre)
-        # t_down_line.Placement = App.Placement(t_down_line.Placement.Base, rotation, centre)
-        # t_through_line.Placement = App.Placement(t_through_line.Placement.Base, rotation, centre)
         #Draw solid sections
         t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
         t_across.WallThickness = joint_wall_thickness
@@ -130,10 +127,6 @@ class Four_Way_Cross:
         t_through_start = App.Vector(0, -through_long_distance, 0)
         t_through_end = App.Vector(0, through_short_distance, 0)
         t_through_line = Draft.make_line(t_through_start,t_through_end)
-        # Place the lines in the correct locations to take account of rotation and centre.
-        # t_across_line.Placement = App.Placement(t_across_line.Placement.Base, rotation, centre)
-        # t_down_line.Placement = App.Placement(t_down_line.Placement.Base, rotation, centre)
-        # t_through_line.Placement = App.Placement(t_through_line.Placement.Base, rotation, centre)
         #Draw solid sections
         t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
         t_across.WallThickness = joint_wall_thickness
@@ -171,3 +164,94 @@ class Four_Way_Cross:
         self.fitting.addObject(t_down)
         self.fitting.addObject(t_through)
         self.fitting.Label=fitting_label
+
+
+class Double_Fixing_Pad:
+    """ A class representing a Double Fixing Pad object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/double-fixing-pad-48mm-d48/ """
+    
+    length = 35
+    width = 140
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Double Fixing Pad in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Make the tube
+        tube = Shapes.addTube(freecad_document, "Tube")
+        pole_radius = pole_diameter / 2
+        tube.InnerRadius = pole_radius
+        tube.OuterRadius = pole_radius + joint_wall_thickness
+        tube.Height = Double_Fixing_Pad.length
+        # Make the pad
+        box = freecad_document.addObject("Part::Box", "Double Pad")
+        box.Length = Double_Fixing_Pad.width
+        box.Width = joint_wall_thickness
+        box.Height = Double_Fixing_Pad.length
+        box.Placement = App.Placement(
+                    App.Vector(-box.Length / 2 , 
+                               pole_radius,
+                               0),
+                    App.Rotation(0, 0, 0))
+        # Create a compond of the two objects
+        fitting = freecad_document.addObject("Part::Compound", fitting_label)
+        fitting.Links = [tube, box]
+        # Rotate
+        fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(fitting, centre)
+
+
+class Double_Sided_Collar:
+    """ A class representing a Double Sided object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/double-sided-collar-plate-90-48mm-d48-2/ """
+    
+    length = 35
+    width = 70
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Double Fixing Pad in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Make the tube
+        tube = Shapes.addTube(freecad_document, "Tube")
+        pole_radius = pole_diameter / 2
+        tube.InnerRadius = pole_radius
+        tube.OuterRadius = pole_radius + joint_wall_thickness
+        tube.Height = Double_Sided_Collar.length
+        # Make the pads
+        box_1 = freecad_document.addObject("Part::Box", "Collar_Pad_1")
+        box_1.Length = Double_Sided_Collar.width
+        box_1.Width = joint_wall_thickness
+        box_1.Height = Double_Sided_Collar.length
+        box_1.Placement = App.Placement(
+                    App.Vector(0 , 
+                               pole_radius,
+                               0),
+                    App.Rotation(0, 0, 0))
+        box_2 = freecad_document.addObject("Part::Box", "Collar_Pad_2")
+        box_2.Length = joint_wall_thickness
+        box_2.Width = Double_Sided_Collar.width
+        box_2.Height = Double_Sided_Collar.length
+        box_2.Placement = App.Placement(
+                    App.Vector(-(pole_radius + joint_wall_thickness) , 
+                               - Double_Sided_Collar.width,
+                               0),
+                    App.Rotation(0, 0, 0))
+        # Create a compond of the two objects
+        fitting = freecad_document.addObject("Part::Compound", fitting_label)
+        fitting.Links = [tube, box_1, box_2]
+        # Rotate
+        fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(fitting, centre)
