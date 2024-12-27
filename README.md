@@ -44,17 +44,27 @@ For the composting cabin the liquid waste is separated at the toilet. This enabl
 
 ## Design Tools
 
-The files contained in this repository primarily deal with the design of the structure. They consist of a set of python files in directory /src/puthon with extension ".py". There two sorts of python files:
+The files contained in this repository primarily deal with the design of the
+structure. They consist of a set of python files in directory /src/python
+with extension ".py". There two sorts of python files:
 
-- **Macro files** - These are files that are used to generate 3d models in the open source software [FreeCAD](https://www.freecad.org/). To use FreeCAD to generate the models use the Freecad menu Macro > Macros to navigate to the file you wish to use. The freFreeCAD version used for this project is 0.21.2. Currently the following Macro files have been created:
+- **Macro files** - These are files that are used to generate 3d models in the
+open source software [FreeCAD](https://www.freecad.org/). To use FreeCAD to
+generate the models use the Freecad menu Macro > Macros to navigate to the
+file you wish to use. The FreeCAD version used for this project is 0.21.2.
+Currently the following Macro files have been created:
 
-    - macro_fitting_side_outlet_t.py - Draws a simple side outlet t scaffolding joint.
-    - macro_fitting-sideoutlet_t_test.py - Tests all rotations of the side outlet and illustrates how they can be connected to scaffolding pipe.
-    - TODO create and document extra files
+    - macro_fitting_XXX.py - Draws a scaffolding fitting of type XXX.
+    - macro_fitting_XXX_test.py - Tests all rotations of the XXX fitting and
+    illustrates how they can be connected to scaffolding pipes and/or boards.
+    - TODO add other files
 - **Support Files** - 
  
-    - parameters.py - contains key parameters upon which the design is based. For example seat_height_from_ground specifies the height in millimeters that the toilet seat needs to above the ground.
-    - make_fittings.py - this contains functions used to make 3d models of scaffolding fittings.
+    - parameters.py - contains key parameters upon which the design is based.
+    For example seat_height_from_ground specifies the height in millimeters
+    that the toilet seat needs to above the ground.
+    - make_fittings.py - this contains functions used to make 3d models
+    of scaffolding fittings.
 
 
 

@@ -1,18 +1,10 @@
 # This file contains all the functions used for drawing
 # fittings used to connect scaffolding pipes.
 
-#  Import the packages that we need - TODO check that all of these are needed
+#  Import the packages that we need
 import FreeCAD as App
-# import Part
-# import Sketcher
 import Arch
-# import Part
 import Draft
-# import FreeCADGui as Gui
-# import math
-# import WorkingPlane
-# import App
-
 from BasicShapes import Shapes
 from parameters import *
 
@@ -208,7 +200,7 @@ class Double_Fixing_Pad:
 
 
 class Double_Sided_Collar:
-    """ A class representing a Double Sided object for standard 48,3 scaffolding
+    """ A class representing a Double Sided Collar object for standard 48,3 scaffolding
      This is a model of the following fitting:
     https://pipedreamfittings.com/product/double-sided-collar-plate-90-48mm-d48-2/ """
     
@@ -220,7 +212,7 @@ class Double_Sided_Collar:
                 fitting_label,
                 rotation = App.Rotation(0,0,0),
                 centre = App.Vector(0,0,0)):
-        """ Constructs a Double Fixing Pad in the freecad_document, with label attribute
+        """ Constructs a Double Sided Collar in the freecad_document, with label attribute
         given by parameter fitting_lable and centre and rotation given by the
         corresponding parameters.  """
         # Make the tube
@@ -248,7 +240,100 @@ class Double_Sided_Collar:
                                - Double_Sided_Collar.width,
                                0),
                     App.Rotation(0, 0, 0))
+        # Create a compond of the three objects
+        fitting = freecad_document.addObject("Part::Compound", fitting_label)
+        fitting.Links = [tube, box_1, box_2]
+        # Rotate
+        fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(fitting, centre)
+
+class Single_Male_Swivel:
+    """ A class representing a Signle Male Swivel object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/single-male-swivel-48mm-d48/ """
+    
+    length = 44.5
+    distance_to_hole = 53
+    pad_width = distance_to_hole - pole_diameter / 2 + length / 2
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Single Male Swivel in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Make the tube
+        tube = Shapes.addTube(freecad_document, "Tube")
+        pole_radius = pole_diameter / 2
+        tube.InnerRadius = pole_radius
+        tube.OuterRadius = pole_radius + joint_wall_thickness
+        tube.Height = Single_Male_Swivel.length
+        # Make the pads
+        box_1 = freecad_document.addObject("Part::Box", "Swivel_Pad_1")
+        box_1.Length = Single_Male_Swivel.pad_width
+        box_1.Width = joint_wall_thickness
+        box_1.Height = Single_Male_Swivel.length
+        box_1.Placement = App.Placement(
+                    App.Vector(pole_radius , 
+                               - box_1.Width / 2,
+                               0),
+                    App.Rotation(0, 0, 0))
         # Create a compond of the two objects
+        fitting = freecad_document.addObject("Part::Compound", fitting_label)
+        fitting.Links = [tube, box_1]
+        # Rotate
+        fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(fitting, centre)
+
+
+
+class Double_Male_Swivel:
+    """ A class representing a Signle Male Swivel object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/double-male-swivel-48mm-d48// """
+    
+    length = 44.5
+    distance_to_hole = 53
+    pad_width = distance_to_hole - pole_diameter / 2 + length / 2
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Double Male Swivel in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Make the tube
+        tube = Shapes.addTube(freecad_document, "Tube")
+        pole_radius = pole_diameter / 2
+        tube.InnerRadius = pole_radius
+        tube.OuterRadius = pole_radius + joint_wall_thickness
+        tube.Height = Double_Male_Swivel.length
+        # Make the pads
+        box_1 = freecad_document.addObject("Part::Box", "Swivel_Pad_1")
+        box_1.Length = Double_Male_Swivel.pad_width
+        box_1.Width = joint_wall_thickness
+        box_1.Height = Double_Male_Swivel.length
+        box_1.Placement = App.Placement(
+                    App.Vector(pole_radius , 
+                               - box_1.Width / 2,
+                               0),
+                    App.Rotation(0, 0, 0))
+        box_2 = freecad_document.addObject("Part::Box", "Swivel_Pad_2")
+        box_2.Length = Double_Male_Swivel.pad_width
+        box_2.Width = joint_wall_thickness
+        box_2.Height = Double_Male_Swivel.length
+        box_2.Placement = App.Placement(
+                    App.Vector(-(pole_radius + Double_Male_Swivel.pad_width) , 
+                               - box_2.Width / 2,
+                               0),
+                    App.Rotation(0, 0, 0))
+        # Create a compond of the three objects
         fitting = freecad_document.addObject("Part::Compound", fitting_label)
         fitting.Links = [tube, box_1, box_2]
         # Rotate
