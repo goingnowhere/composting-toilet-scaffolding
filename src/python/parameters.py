@@ -17,17 +17,20 @@ joint_wall_thickness = 5 # The thickness of the walls of the joints
 
 
 # Boards
-board_width = 2500 # Width of a standard plywood board
-board_length = 1220 # Length of a standard plywood board
+board_length = 2500 # Width of a standard plywood board
+board_width = 1220 # Length of a standard plywood board
 floor_board_thickness = 18 # The thickness of plywood boards used for the floor.
-other_board_thickness = 12 # The tickness of the boards used for the walls and roof.
+side_panel_board_thickness = 10 # Thickness of boards used in side panels. This has a max of 10mm due to fittings.
+other_board_thickness = 10 # The tickness of the boards used for the walls and roof.
 
 
 # Structure measurements
-seat_height_from_ground = 1250 # The height that the toilet seat has to be from the ground to enable a solid waste container to be placed underneath.
-seat_depth = 500 # The distance from the back wall to the edge of the seat.
-seat_height_from_floor = 450 # The heignt the seat is from the floor of the structure
-roof_height_from_floor = 2000 # The distance between the floor of the structure and the roof of the structure.
+seat_height_from_ground = 1100 # The height that the toilet seat has to be from the ground to enable a solid waste container to be placed underneath.
+seat_depth = 600 # The distance from the back wall to the edge of the seat.
+seat_height_from_floor = 400 # The heignt the seat is from the floor of the structure
+roof_height_from_floor = 2100 # The distance between the floor of the structure and the roof of the structure.
+roof_pitch_differance = 200 # The distance the roof rises from back to front.
+wall_top_from_roof = 250 # The distance between the roof of the structure and the top of the floor.
 max_pole_underground = 500 # The maximum amount the poles will be sunk into the ground. Note on a slope only the higest points would be sunk in that much.
 board_overlap = 12 # The amount the boards are routed to overlap the scafolding pole. This should be a circular rout matching the diameter of the scaffolding pole as far as possible
 

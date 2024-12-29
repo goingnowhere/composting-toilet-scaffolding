@@ -1,4 +1,4 @@
-# This file contains all the functions used for drawing
+# This file contains all the classes used for making
 # fittings used to connect scaffolding pipes.
 
 #  Import the packages that we need
