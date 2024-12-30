@@ -5,7 +5,7 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from make_fittings import Single_Male_Swivel
+from make_fittings import Single_Sided_Clip
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -16,5 +16,5 @@ Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
 # Draw a simple single male swivel
-single_male_swivel_1 = Single_Male_Swivel(freecad_document = document,
-                               fitting_label = "Single_Male_Swivel_1")
+single_sided_clip_1 = Single_Sided_Clip(freecad_document = document,
+                               fitting_label = "Single_Sided_Clip_1")

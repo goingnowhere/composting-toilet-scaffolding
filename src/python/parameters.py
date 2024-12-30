@@ -14,6 +14,7 @@
 pole_diameter = 48 # The diameter of the scafolding poles that we are using.
 pole_wall_thickness = 3 # The thickness of the walls of the poles
 joint_wall_thickness = 5 # The thickness of the walls of the joints
+clip_wall_thickness = 1 # The thickness of the walls of the clips
 
 
 # Boards

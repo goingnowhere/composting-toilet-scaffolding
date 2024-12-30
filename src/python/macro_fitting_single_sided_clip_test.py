@@ -9,7 +9,7 @@ import Draft
 import Arch
 
 from parameters import *
-from make_fittings import Single_Male_Swivel, make_pole
+from make_fittings import Single_Sided_Clip, make_pole
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -22,74 +22,74 @@ Gui.activateWorkbench("BIMWorkbench21")
 # Draw a a set of double fixing pad objects rotated in all directions
 # connected by scaffolding poles and a panel
 panel_sides = 600
-swivel_distance = panel_sides + pole_diameter
-x_short_distance = swivel_distance / 3 - Single_Male_Swivel.length / 2
-x_long_distance = 2 * swivel_distance / 3 - Single_Male_Swivel.length / 2
-y_short_distance = swivel_distance / 3 + Single_Male_Swivel.length / 2
-y_long_distance = 2 * swivel_distance / 3 + Single_Male_Swivel.length / 2
+clip_distance = panel_sides + pole_diameter
+x_short_distance = clip_distance / 3 # - Single_Sided_Clip.length / 2
+x_long_distance = 2 * clip_distance / 3 # - Single_Sided_Clip.length / 2
+y_short_distance = clip_distance / 3 # + Single_Sided_Clip.length / 2
+y_long_distance = 2 * clip_distance / 3 # + Single_Sided_Clip.length / 2
 centre_1 = App.Vector(x_short_distance, 0 ,0)
 centre_2 = App.Vector(x_long_distance, 0, 0)
 centre_3 = App.Vector(0, y_short_distance , 0)
 centre_4 = App.Vector(0, y_long_distance , 0)
-centre_5 = App.Vector(swivel_distance, y_short_distance, 0)
-centre_6 = App.Vector(swivel_distance, y_long_distance, 0)
-centre_7 = App.Vector(x_short_distance, swivel_distance , 0)
-centre_8 = App.Vector(x_long_distance, swivel_distance, 0)
-single_male_swivel_1 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_1",
+centre_5 = App.Vector(clip_distance, y_short_distance, 0)
+centre_6 = App.Vector(clip_distance, y_long_distance, 0)
+centre_7 = App.Vector(x_short_distance, clip_distance , 0)
+centre_8 = App.Vector(x_long_distance, clip_distance, 0)
+single_sided_clip_1 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_1",
                     centre = centre_1,
                     rotation = App.Rotation(90, 0, 90))
-single_male_swivel_2 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_2",
+single_sided_clip_2 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_2",
                     centre = centre_2,
                     rotation = App.Rotation(90, 0, 90))
-single_male_swivel_3 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_3",
+single_sided_clip_3 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_3",
                     centre = centre_3,
                     rotation = App.Rotation(0, 0, 90))
-single_male_swivel_4 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_4",
+single_sided_clip_4 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_4",
                     centre = centre_4,
                     rotation = App.Rotation(0, 0, 90))
-single_male_swivel_5 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_5",
+single_sided_clip_5 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_5",
                     centre = centre_5,
                     rotation = App.Rotation(0, 180, 90))
-single_male_swivel_6 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_6",
+single_sided_clip_6 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_6",
                     centre = centre_6,
                     rotation = App.Rotation(0, 180, 90))
-single_male_swivel_7 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_7",
+single_sided_clip_7 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_7",
                     centre = centre_7,
                     rotation = App.Rotation(270, 0, 270))
-single_male_swivel_8 = Single_Male_Swivel(freecad_document = document,
-                    fitting_label = "Single_Male_Swivel_8",
+single_sided_clip_8 = Single_Sided_Clip(freecad_document = document,
+                    fitting_label = "Single_Sided_Clip_8",
                     centre = centre_8,
                     rotation = App.Rotation(270, 0, 270))
 
 # Offsets for double fixing pad
-offset = Single_Male_Swivel.length
+offset = Single_Sided_Clip.length / 2
 # Make Connection poles.
 line_1_2 = Draft.make_line(
-    centre_1 + App.Vector(0, 0, 0),
+    centre_1 + App.Vector(-offset, 0, 0),
     centre_2 + App.Vector(offset, 0, 0))
 make_pole(line_1_2, "Pole_1_2")
 line_3_4 = Draft.make_line(
     centre_3 + App.Vector(0, -offset, 0),
-    centre_4 + App.Vector(0, 0, 0))
+    centre_4 + App.Vector(0, offset, 0))
 make_pole(line_3_4, "Pole_3_4")
 line_5_6 = Draft.make_line(
     centre_5 + App.Vector(0, -offset, 0),
-    centre_6 + App.Vector(0, 0, 0))
+    centre_6 + App.Vector(0, offset, 0))
 make_pole(line_5_6, "Pole_5_6")
 line_7_8 = Draft.make_line(
-    centre_7 + App.Vector(0, 0, 0),
+    centre_7 + App.Vector(-offset, 0, 0),
     centre_8 + App.Vector(offset, 0, 0))
 make_pole(line_7_8, "Pole_7_8")
 
 # Add Panel
 pole_radius = pole_diameter/2
 rect = Draft.makeRectangle(panel_sides, panel_sides)
-panel = Arch.makePanel(rect, thickness = 18)
-Draft.move(panel, App.Vector(pole_radius, pole_radius, joint_wall_thickness / 2))
+panel = Arch.makePanel(rect, thickness = side_panel_board_thickness)
+Draft.move(panel, App.Vector(pole_radius, pole_radius, - side_panel_board_thickness / 2))

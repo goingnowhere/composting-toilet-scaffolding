@@ -248,14 +248,14 @@ class Double_Sided_Collar:
         # Move
         Draft.move(fitting, centre)
 
-class Single_Male_Swivel:
-    """ A class representing a Signle Male Swivel object for standard 48,3 scaffolding
+class Single_Sided_Clip:
+    """ A class representing a Single Sided Clip object for standard 48,3 scaffolding
      This is a model of the following fitting:
-    https://pipedreamfittings.com/product/single-male-swivel-48mm-d48/ """
+    https://pipedreamfittings.com/product/single-sided-mesh-panel-clip-48mm/ """
     
-    length = 44.5
-    distance_to_hole = 53
-    pad_width = distance_to_hole - pole_diameter / 2 + length / 2
+    length = 16
+    distance_to_hole = 35 + 25
+    pad_width = distance_to_hole - pole_diameter / 2
     
     def __init__(self,
                 freecad_document,
@@ -269,17 +269,22 @@ class Single_Male_Swivel:
         tube = Shapes.addTube(freecad_document, "Tube")
         pole_radius = pole_diameter / 2
         tube.InnerRadius = pole_radius
-        tube.OuterRadius = pole_radius + joint_wall_thickness
-        tube.Height = Single_Male_Swivel.length
+        tube.OuterRadius = pole_radius + clip_wall_thickness
+        tube.Height = Single_Sided_Clip.length
+        tube.Placement = App.Placement(
+                    App.Vector(0, 
+                               0,
+                               -Single_Sided_Clip.length / 2),
+                    App.Rotation(0, 0, 0))
         # Make the pads
         box_1 = freecad_document.addObject("Part::Box", "Swivel_Pad_1")
-        box_1.Length = Single_Male_Swivel.pad_width
-        box_1.Width = joint_wall_thickness
-        box_1.Height = Single_Male_Swivel.length
+        box_1.Length = Single_Sided_Clip.pad_width
+        box_1.Width = side_panel_board_thickness + clip_wall_thickness * 2
+        box_1.Height = Single_Sided_Clip.length
         box_1.Placement = App.Placement(
                     App.Vector(pole_radius , 
                                - box_1.Width / 2,
-                               0),
+                               -Single_Sided_Clip.length / 2),
                     App.Rotation(0, 0, 0))
         # Create a compond of the two objects
         fitting = freecad_document.addObject("Part::Compound", fitting_label)
