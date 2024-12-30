@@ -1,11 +1,11 @@
-# This FreeCAD macro script makes a single male swivel object
+# This FreeCAD macro script makes a double sided clip object
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from fittings import Double_Male_Swivel
+from fittings import Double_Sided_Clip
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -16,5 +16,5 @@ Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
 # Draw a simple single male swivel
-double_male_swivel_1 = Double_Male_Swivel(freecad_document = document,
-                               fitting_label = "Double_Male_Swivel_1")
+double_sided_clip_1 = Double_Sided_Clip(freecad_document = document,
+                               fitting_label = "Double_Sided_Clip_1")

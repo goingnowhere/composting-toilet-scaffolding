@@ -263,7 +263,7 @@ class Single_Sided_Clip:
                 fitting_label,
                 rotation = App.Rotation(0,0,0),
                 centre = App.Vector(0,0,0)):
-        """ Constructs a Single Male Swivel in the freecad_document, with label attribute
+        """ Constructs a Single Single Sided Clip in the freecad_document, with label attribute
         given by parameter fitting_lable and centre and rotation given by the
         corresponding parameters.  """
         # Make the tube
@@ -277,7 +277,7 @@ class Single_Sided_Clip:
                                0,
                                -Single_Sided_Clip.length / 2),
                     App.Rotation(0, 0, 0))
-        # Make the pads
+        # Make the clips
         box_1 = freecad_document.addObject("Part::Box", "Clip")
         box_1.Length = Single_Sided_Clip.pad_width
         box_1.Width = side_panel_board_thickness + clip_wall_thickness * 2
@@ -296,47 +296,52 @@ class Single_Sided_Clip:
         Draft.move(fitting, centre)
 
 
-class Double_Male_Swivel:
-    """ A class representing a Signle Male Swivel object for standard 48,3 scaffolding
+class Double_Sided_Clip:
+    """ A class representing a Double Sided Clip object for standard 48,3 scaffolding
      This is a model of the following fitting:
-    https://pipedreamfittings.com/product/double-male-swivel-48mm-d48// """
+    https://pipedreamfittings.com/product/double-sided-mesh-panel-clip-48mm/ """
     
-    length = 44.5
-    distance_to_hole = 53
-    pad_width = distance_to_hole - pole_diameter / 2 + length / 2
+    length = 16
+    distance_to_hole = 35 + 25
+    pad_width = distance_to_hole - pole_diameter / 2
     
     def __init__(self,
                 freecad_document,
                 fitting_label,
                 rotation = App.Rotation(0,0,0),
                 centre = App.Vector(0,0,0)):
-        """ Constructs a Double Male Swivel in the freecad_document, with label attribute
+        """ Constructs a Double Sided Clip in the freecad_document, with label attribute
         given by parameter fitting_lable and centre and rotation given by the
         corresponding parameters.  """
         # Make the tube
         tube = Shapes.addTube(freecad_document, "Tube")
         pole_radius = pole_diameter / 2
         tube.InnerRadius = pole_radius
-        tube.OuterRadius = pole_radius + joint_wall_thickness
-        tube.Height = Double_Male_Swivel.length
-        # Make the pads
-        box_1 = freecad_document.addObject("Part::Box", "Swivel_Pad_1")
-        box_1.Length = Double_Male_Swivel.pad_width
-        box_1.Width = joint_wall_thickness
-        box_1.Height = Double_Male_Swivel.length
+        tube.OuterRadius = pole_radius + clip_wall_thickness
+        tube.Height = Double_Sided_Clip.length
+        tube.Placement = App.Placement(
+                    App.Vector(0, 
+                               0,
+                               -Double_Sided_Clip.length / 2),
+                    App.Rotation(0, 0, 0))
+        # Make the clips
+        box_1 = freecad_document.addObject("Part::Box", "Clip_1")
+        box_1.Length = Double_Sided_Clip.pad_width
+        box_1.Width = side_panel_board_thickness + clip_wall_thickness * 2
+        box_1.Height = Double_Sided_Clip.length
         box_1.Placement = App.Placement(
                     App.Vector(pole_radius , 
                                - box_1.Width / 2,
-                               0),
+                               -Double_Sided_Clip.length / 2),
                     App.Rotation(0, 0, 0))
-        box_2 = freecad_document.addObject("Part::Box", "Swivel_Pad_2")
-        box_2.Length = Double_Male_Swivel.pad_width
-        box_2.Width = joint_wall_thickness
-        box_2.Height = Double_Male_Swivel.length
+        box_2 = freecad_document.addObject("Part::Box", "Clip_2")
+        box_2.Length = Double_Sided_Clip.pad_width
+        box_2.Width = side_panel_board_thickness + clip_wall_thickness * 2
+        box_2.Height = Double_Sided_Clip.length
         box_2.Placement = App.Placement(
-                    App.Vector(-(pole_radius + Double_Male_Swivel.pad_width) , 
+                    App.Vector(-(pole_radius + Double_Sided_Clip.pad_width) , 
                                - box_2.Width / 2,
-                               0),
+                               -Double_Sided_Clip.length / 2),
                     App.Rotation(0, 0, 0))
         # Create a compond of the three objects
         fitting = freecad_document.addObject("Part::Compound", fitting_label)

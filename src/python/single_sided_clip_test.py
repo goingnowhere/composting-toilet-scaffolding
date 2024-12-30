@@ -1,4 +1,4 @@
-# This FreeCAD macro script makes single male swivel objects
+# This FreeCAD script tests double sided script objects
 # for advanced positioning and rotation testing as well as to
 # indicate how these fittings can be used to fix boards to scafolding.
 
@@ -24,10 +24,10 @@ Gui.activateWorkbench("BIMWorkbench21")
 # connected by scaffolding poles and a panel
 panel_sides = 600
 clip_distance = panel_sides + pole_diameter
-x_short_distance = clip_distance / 3 # - Single_Sided_Clip.length / 2
-x_long_distance = 2 * clip_distance / 3 # - Single_Sided_Clip.length / 2
-y_short_distance = clip_distance / 3 # + Single_Sided_Clip.length / 2
-y_long_distance = 2 * clip_distance / 3 # + Single_Sided_Clip.length / 2
+x_short_distance = clip_distance / 3 
+x_long_distance = 2 * clip_distance / 3 
+y_short_distance = clip_distance / 3 
+y_long_distance = 2 * clip_distance / 3 
 centre_1 = App.Vector(x_short_distance, 0 ,0)
 centre_2 = App.Vector(x_long_distance, 0, 0)
 centre_3 = App.Vector(0, y_short_distance , 0)
