@@ -9,7 +9,8 @@ import Draft
 import Arch
 
 from parameters import *
-from make_fittings import Single_Sided_Clip, make_pole
+from fittings import make_pole
+from fittings import Single_Sided_Clip
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")

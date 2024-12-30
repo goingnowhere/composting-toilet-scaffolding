@@ -6,7 +6,7 @@ import FreeCAD
 import FreeCADGui as Gui
 
 
-from make_fittings import Side_Outlet_T
+from fittings import Side_Outlet_T
 
 # Set Up Freecad and Select Workbench
 FreeCAD.Console.PrintMessage("Starting FreeCAD generation.\n")

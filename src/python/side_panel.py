@@ -13,7 +13,7 @@ from parameters import roof_height_from_floor
 from parameters import wall_top_from_roof
 from parameters import board_width
 from parameters import seat_depth
-from make_fittings import *
+from fittings import *
 
 
 class Side_Panel:

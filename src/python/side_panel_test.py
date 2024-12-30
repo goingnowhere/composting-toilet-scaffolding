@@ -9,8 +9,8 @@ import Draft
 import Arch
 
 from parameters import *
-from make_fittings import make_pole, display_variable
-from make_side_panel import Side_Panel
+from fittings import make_pole, display_variable
+from side_panel import Side_Panel
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")

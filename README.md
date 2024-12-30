@@ -67,17 +67,18 @@ generate the models use the Freecad menu Macro > Macros to navigate to the
 file you wish to use. The FreeCAD version used for this project is 0.21.2.
 Currently the following Macro files have been created:
 
-    - macro_fitting_XXX.py - Draws a scaffolding fitting of type XXX.
-    - macro_fitting_XXX_test.py - Tests all rotations of the XXX fitting and
-    illustrates how they can be connected to scaffolding pipes and/or boards.
+    - XXX_simple.py - Draws a a component of type XXX.
+    - XXX_test.py - Tests all the use of the XXX component in the
+    - context of other components.
     - TODO add other files
 - **Support Files** - 
  
     - parameters.py - contains key parameters upon which the design is based.
     For example seat_height_from_ground specifies the height in millimeters
     that the toilet seat needs to above the ground.
-    - make_fittings.py - this contains functions used to make 3d models
+    - fittings.py - this contains classes used to create scafold fittings.
     of scaffolding fittings.
+    - side_panel.py contains the class to generate a modular Side Panel
 
 
 ## Appendix 1: Scafolding Join Components

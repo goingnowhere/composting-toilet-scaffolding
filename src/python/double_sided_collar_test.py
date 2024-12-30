@@ -9,7 +9,7 @@ import Draft
 import Arch
 
 from parameters import *
-from make_fittings import Double_Sided_Collar, make_pole
+from fittings import Double_Sided_Collar, make_pole
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")

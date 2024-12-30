@@ -5,7 +5,7 @@
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from make_fittings import Double_Sided_Collar
+from fittings import Double_Sided_Collar
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")

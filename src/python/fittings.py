@@ -248,6 +248,7 @@ class Double_Sided_Collar:
         # Move
         Draft.move(fitting, centre)
 
+
 class Single_Sided_Clip:
     """ A class representing a Single Sided Clip object for standard 48,3 scaffolding
      This is a model of the following fitting:
@@ -277,7 +278,7 @@ class Single_Sided_Clip:
                                -Single_Sided_Clip.length / 2),
                     App.Rotation(0, 0, 0))
         # Make the pads
-        box_1 = freecad_document.addObject("Part::Box", "Swivel_Pad_1")
+        box_1 = freecad_document.addObject("Part::Box", "Clip")
         box_1.Length = Single_Sided_Clip.pad_width
         box_1.Width = side_panel_board_thickness + clip_wall_thickness * 2
         box_1.Height = Single_Sided_Clip.length
@@ -293,7 +294,6 @@ class Single_Sided_Clip:
         fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
         # Move
         Draft.move(fitting, centre)
-
 
 
 class Double_Male_Swivel:

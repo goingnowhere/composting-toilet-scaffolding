@@ -1,11 +1,11 @@
-# This FreeCAD macro script makes a single 4 way cross object
+# This FreeCAD macro script makes a single male swivel object
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from make_fittings import Four_Way_Cross
+from fittings import Double_Male_Swivel
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -15,6 +15,6 @@ Gui.activeDocument().activeView().viewDefaultOrientation()
 Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
-# Draw a simple side outlet T object
-Four_Way_Cross_1 = Four_Way_Cross(freecad_document = document,
-                               fitting_label = "Four_Way_Cross_1")
+# Draw a simple single male swivel
+double_male_swivel_1 = Double_Male_Swivel(freecad_document = document,
+                               fitting_label = "Double_Male_Swivel_1")

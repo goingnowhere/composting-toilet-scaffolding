@@ -1,12 +1,11 @@
-# This FreeCAD macro script makes a side panel
+# This FreeCAD macro script makes a double fixing pad object
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from make_side_panel import Side_Panel
-from make_fittings import display_variable
+from fittings import Double_Fixing_Pad
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -17,7 +16,5 @@ Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
 # Draw a simple side outlet T object
-side_panel = Side_Panel(freecad_document = document,
-                        structure_label = "Side_Panel")
-display_variable("ground_front_left", side_panel.ground_front_left)
-display_variable("ground_front_right", side_panel.ground_front_right)
+double_fixing_pad_1 = Double_Fixing_Pad(freecad_document = document,
+                               fitting_label = "Double_Fixing_Pad_1")

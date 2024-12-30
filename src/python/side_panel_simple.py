@@ -1,11 +1,12 @@
-# This FreeCAD macro script makes a single male swivel object
+# This FreeCAD macro script makes a side panel
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from make_fittings import Single_Sided_Clip
+from side_panel import Side_Panel
+from fittings import display_variable
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -15,6 +16,8 @@ Gui.activeDocument().activeView().viewDefaultOrientation()
 Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
-# Draw a simple single male swivel
-single_sided_clip_1 = Single_Sided_Clip(freecad_document = document,
-                               fitting_label = "Single_Sided_Clip_1")
+# Draw a simple side outlet T object
+side_panel = Side_Panel(freecad_document = document,
+                        structure_label = "Side_Panel")
+display_variable("ground_front_left", side_panel.ground_front_left)
+display_variable("ground_front_right", side_panel.ground_front_right)
