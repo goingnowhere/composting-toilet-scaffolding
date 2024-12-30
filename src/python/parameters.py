@@ -27,7 +27,7 @@ other_board_thickness = 10 # The tickness of the boards used for the walls and r
 # Structure measurements
 seat_height_from_ground = 1100 # The height that the toilet seat has to be from the ground to enable a solid waste container to be placed underneath.
 seat_depth = 600 # The distance from the back wall to the edge of the seat.
-seat_height_from_floor = 400 # The heignt the seat is from the floor of the structure
+seat_height_from_floor = 450 # The heignt the seat is from the floor of the structure
 roof_height_from_floor = 2100 # The distance between the floor of the structure and the roof of the structure.
 roof_pitch_differance = 200 # The distance the roof rises from back to front.
 wall_top_from_roof = 250 # The distance between the roof of the structure and the top of the floor.

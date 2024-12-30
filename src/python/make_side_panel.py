@@ -117,11 +117,11 @@ class Side_Panel:
         ###############
 
         # Create ground joints
-        ground_front_joint = Side_Outlet_T(freecad_document = freecad_document,
+        ground_front_joint = Side_Outlet_T(freecad_document = freecad_document, #TODO Change fitting to Long/Short T and rotate sifferently
                                            fitting_label = "Ground_Front_Joint",
                                            rotation = App.Rotation(0, 0, 90),
                                            centre = ground_front_centre)
-        ground_near_joint = Four_Way_Cross(freecad_document = freecad_document,
+        ground_near_joint = Four_Way_Cross(freecad_document = freecad_document, #TODO change rotation so that sides dont protrude.
                                            fitting_label = "Ground_Near_Joint",
                                            rotation = App.Rotation(0, 0, 270),
                                            centre = ground_near_centre)
@@ -160,11 +160,11 @@ class Side_Panel:
                                            rotation = App.Rotation(0, 0, 270),
                                            centre = seat_back_centre)
         # Create wall top joints
-        wall_top_front_joint = Side_Outlet_T(freecad_document = freecad_document,
+        wall_top_front_joint = Side_Outlet_T(freecad_document = freecad_document, # Change to Long/Short T
                                            fitting_label = "Wall_Top_Front_Joint",
                                            rotation = App.Rotation(0, 90, 90),
                                            centre = wall_top_front_centre)
-        wall_top_back_joint = Side_Outlet_T(freecad_document = freecad_document,
+        wall_top_back_joint = Side_Outlet_T(freecad_document = freecad_document, # Change to Long/Short T
                                            fitting_label = "Wall_Top_Back_Joint",
                                            rotation = App.Rotation(0, 90, 270),
                                            centre = wall_top_back_centre)
