@@ -21,9 +21,10 @@ class Side_Panel:
     composting toilets. The panel can be used on both left and right
     and can be configured with either a urinal floor or a sit down toilet floor."""
     
-    length = 44.5
-    distance_to_hole = 53
-    pad_width = distance_to_hole - pole_diameter / 2 + length / 2
+    # This is copy and paste guff TODO check.
+    # length = 44.5
+    # distance_to_hole = 53
+    # pad_width = distance_to_hole - pole_diameter / 2 + length / 2
     
     def __init__(self,
                 freecad_document,
@@ -282,10 +283,6 @@ class Side_Panel:
                        ground_back_cross,
                        panel_1]
         
-        # Group sections
-        # self.structure = freecad_document.addObject("App::DocumentObjectGroup","Group")
-        # self.structure.addObjects(parts_list)
-        # self.structure.Label=structure_label
         # Create compound
         structure = freecad_document.addObject("Part::Compound", structure_label)
         structure.Links = parts_list
