@@ -217,8 +217,8 @@ class Side_Panel:
         self.structure = structure
 
 class Urinal_Floor:
-    """ A class representing a urinal floor used as part of
-    a composting toilet project"""
+    """ A class representing a Urinal Floor that would 
+    form part of a set of composting toilet blocks."""
     
     
     def __init__(self,
@@ -347,7 +347,7 @@ class Cabin_Ground:
         back_pole = make_pole(back_pole_line, "Back_Pole")
 
         # Make Board
-        board_overlap = Double_Fixing_Pad.length
+        board_overlap = Double_Fixing_Pad.width / 2
         floor_rect = Draft.makeRectangle(board_length, back_y - far_y + board_overlap *2)
         floor_panel = Arch.makePanel(floor_rect, thickness = floor_board_thickness)
         floor_panel.Label = "Ground"
@@ -363,6 +363,133 @@ class Cabin_Ground:
         parts_list = [far_pole,
                       back_pole,
                       floor_panel]
+        
+        # Create compound
+        structure = freecad_document.addObject("App::Part", structure_label)
+        structure.addObjects(parts_list)
+
+        # # Rotate
+        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(structure, centre)
+        self.structure = structure
+
+
+class Cabin_Floor:
+    """ A class representing a Cabin Floor that would 
+    form part of a set of composting toilet blocks."""
+    
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Cabin Floor in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        left_offset = App.Vector(pole_radius, 0, 0)
+        right_offset = App.Vector(side_panel_seperation_x - pole_radius, 0, 0)
+
+
+        # Make poles
+        front_pole_start = floor_front_centre + left_offset
+        front_pole_end = floor_front_centre + right_offset
+        front_pole_line = Draft.make_line(front_pole_start, front_pole_end)
+        front_pole = make_pole(front_pole_line, "Front_Pole")
+
+        near_pole_start = floor_near_centre + left_offset
+        near_pole_end = floor_near_centre + right_offset
+        near_pole_line = Draft.make_line(near_pole_start, near_pole_end)
+        near_pole = make_pole(near_pole_line, "Near_Pole")
+
+        far_pole_1_start = floor_far_centre + left_offset
+        far_pole_1_end = floor_far_centre + right_offset
+        far_pole_1_line = Draft.make_line(far_pole_1_start, far_pole_1_end)
+        far_pole_1 = make_pole(far_pole_1_line, "Far_Pole_1")
+
+        far_pole_2_start = seat_far_centre + left_offset
+        far_pole_2_end = seat_far_centre + right_offset
+        far_pole_2_line = Draft.make_line(far_pole_2_start, far_pole_2_end)
+        far_pole_2 = make_pole(far_pole_2_line, "Far_Pole_2")
+
+        back_pole_start = seat_back_support_centre + left_offset
+        back_pole_end = seat_back_support_centre + right_offset
+        back_pole_line = Draft.make_line(back_pole_start, back_pole_end)
+        back_pole = make_pole(back_pole_line, "Back_Pole")
+
+        # Make Boards
+        floor_width = far_y + Double_Fixing_Pad.width / 2
+        floor_rect = Draft.makeRectangle(board_length, floor_width)
+        floor_panel = Arch.makePanel(floor_rect, thickness = floor_board_thickness)
+        floor_panel.Label = "Floor"
+        floor_start_z = floor_z + joint_radius
+        Draft.move(floor_panel, App.Vector(side_panel_board_thickness / 2,
+                                       0,
+                                       floor_start_z))
+        
+        seat_start_y = far_y - pole_radius - floor_board_thickness
+        seat_end_y = back_y + Double_Fixing_Pad.width / 2
+        seat_width = seat_end_y - seat_start_y
+        seat_rect = Draft.makeRectangle(board_length, seat_width)
+        seat_panel = Arch.makePanel(seat_rect, thickness = floor_board_thickness)
+        seat_panel.Label = "Seat"
+        seat_start_z = seat_z + pole_radius
+        Draft.move(seat_panel, App.Vector(side_panel_board_thickness / 2,
+                                       seat_start_y,
+                                       seat_start_z))
+        
+        side_start_z = floor_start_z + floor_board_thickness
+        side_end_z = seat_start_z
+        side_width = side_end_z - side_start_z
+        side_rect = Draft.makeRectangle(board_length, side_width)
+        side_panel = Arch.makePanel(side_rect, thickness = floor_board_thickness)
+        side_panel.Label = "Side"
+        side_panel.Placement = App.Placement(
+                App.Vector(0, 0, 0),
+                App.Rotation(0, 0, 90),
+                App.Vector(0, 0, 0))
+        Draft.move(side_panel, App.Vector(0,
+                                       seat_start_y + floor_board_thickness,
+                                       side_start_z))
+
+        # TODO: Add fixings for boards
+
+
+        # TODO: Add joints for Rear and Front
+        front_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = front_floor_left_mid_centre)
+        front_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = front_floor_right_mid_centre)
+        back_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = back_seat_left_mid_centre)
+        back_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = back_seat_right_mid_centre)
+
+
+
+        # # # Create a compound of all objects
+        parts_list = [front_pole,
+                      near_pole,
+                      far_pole_1,
+                      far_pole_2,
+                      back_pole,
+                      floor_panel,
+                      seat_panel,
+                      side_panel,
+                      front_left_mid_joint.fitting,
+                      front_right_mid_joint.fitting,
+                      back_left_mid_joint.fitting,
+                      back_right_mid_joint.fitting]
         
         # Create compound
         structure = freecad_document.addObject("App::Part", structure_label)

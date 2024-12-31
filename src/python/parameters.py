@@ -82,7 +82,7 @@ ground_z = 0
 seat_z = seat_height_from_ground + pole_diameter + floor_board_thickness * 2
 # The plane for the joints used for seat back support.
 # Needed so that wheelie bins can slide straight in without obstructions.
-seat_support_z = seat_z + joint_diameter
+seat_support_z = seat_z + pole_radius + floor_board_thickness + joint_radius
 # The plane for joints at floor level.
 floor_z = seat_z - seat_height_from_floor
 # The plane for joints for the top of the side wall

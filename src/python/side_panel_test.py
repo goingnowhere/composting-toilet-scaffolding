@@ -8,7 +8,7 @@ import FreeCADGui as Gui
 
 from parameters import *
 from fittings import make_pole, display_variable
-from structures import Side_Panel
+from structures import Side_Panel, Urinal_Floor, Cabin_Ground, Cabin_Floor
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -28,3 +28,15 @@ side_panel_3 = Side_Panel(freecad_document = document,
                           structure_label = "Side_Panel_3",
                           centre =  App.Vector(2 * side_panel_seperation_x, 0, 0))
 
+# Make Urinal Floor
+urinal_floor = Urinal_Floor(freecad_document = document, 
+                          structure_label = "Urinal_Floor")
+
+# Make Cabin Ground
+cabin_ground = Cabin_Ground(freecad_document = document, 
+                          structure_label = "Cabin_Ground",
+                          centre =  App.Vector(side_panel_seperation_x, 0, 0))
+# Make Cabin Floor
+cabin_floor = Cabin_Floor(freecad_document = document, 
+                          structure_label = "Cabin_Floor",
+                          centre =  App.Vector(side_panel_seperation_x, 0, 0))
