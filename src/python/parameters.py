@@ -81,8 +81,8 @@ front_roof_z = floor_z + front_roof_height_from_floor
 # The plane for joints at the rear of the roof.
 back_roof_z = floor_z + back_roof_height_from_floor
 
-# Vectors for Side_Panel joints.
-################################
+# Centre Vectors for Side_Panel joints.
+#######################################
 
 # Ground Joints
 ground_front_centre = App.Vector(0, front_y, ground_z)
@@ -99,7 +99,7 @@ floor_back_centre = App.Vector(0, back_y, floor_z)
 # Seat Joints
 seat_far_centre = App.Vector(0, far_y, seat_z)
 seat_back_centre = App.Vector(0, back_y, seat_z)
-seat_back_support_centre = App.Vector(0, back_y, seat_z)
+seat_back_support_centre = App.Vector(0, back_y, seat_support_z)
 
 # Wall Top Joints
 wall_top_front_centre = App.Vector(0, front_y, wall_top_z)

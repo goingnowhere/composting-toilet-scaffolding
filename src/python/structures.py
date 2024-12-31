@@ -69,6 +69,10 @@ class Side_Panel:
                                            fitting_label = "Seat_Back_Joint",
                                            rotation = App.Rotation(0, 90, 270),
                                            centre = seat_back_centre)
+        seat_back_support_joint = Two_Socket_Cross(freecad_document = freecad_document,
+                                           fitting_label = "Seat_Back_Support_Joint",
+                                           rotation = App.Rotation(0, 90, 0),
+                                           centre = seat_back_support_centre)
         # Create wall top joints
         wall_top_front_joint = Short_T(freecad_document = freecad_document,
                                            fitting_label = "Wall_Top_Front_Joint",
@@ -177,6 +181,7 @@ class Side_Panel:
                        floor_back_joint.fitting,
                        seat_far_joint.fitting,
                        seat_back_joint.fitting,
+                       seat_back_support_joint.fitting,
                        wall_top_front_joint.fitting,
                        wall_top_back_joint.fitting,
                        roof_front_joint.fitting,
@@ -268,6 +273,69 @@ class Urinal_Floor:
         parts_list = [front_pole,
                       near_pole,
                       far_pole,
+                      back_pole,
+                      floor_panel]
+        
+        # Create compound
+        structure = freecad_document.addObject("App::Part", structure_label)
+        structure.addObjects(parts_list)
+
+        # # Rotate
+        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(structure, centre)
+        self.structure = structure
+
+
+
+class Cabin_Ground:
+    """ A class representing a Cabin Ground structure used as part of
+    a composting toilet project. The solid waste container sits
+    snugly between the Cabin Ground and the toilet seat that is
+    part of the Cabin Floor structure so as to prevent the entry
+    flies into the container."""
+    
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Cabin_Ground in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        left_offset = App.Vector(pole_radius, 0, 0)
+        right_offset = App.Vector(side_panel_seperation_x - pole_radius, 0, 0)
+
+
+        # Make poles
+
+        far_pole_start = ground_far_centre + left_offset
+        far_pole_end = ground_far_centre + right_offset
+        far_pole_line = Draft.make_line(far_pole_start, far_pole_end)
+        far_pole = make_pole(far_pole_line, "Far_Pole")
+
+        back_pole_start = ground_back_centre + left_offset
+        back_pole_end = ground_back_centre + right_offset
+        back_pole_line = Draft.make_line(back_pole_start, back_pole_end)
+        back_pole = make_pole(back_pole_line, "Back_Pole")
+
+        # Make Board
+        board_overlap = Double_Fixing_Pad.length
+        floor_rect = Draft.makeRectangle(board_length, back_y - far_y + board_overlap *2)
+        floor_panel = Arch.makePanel(floor_rect, thickness = floor_board_thickness)
+        floor_panel.Label = "Ground"
+        Draft.move(floor_panel, App.Vector(side_panel_board_thickness / 2,
+                                       far_y - board_overlap,
+                                       ground_z + joint_radius))
+
+        # TODO: Add fixings for boards
+
+
+
+        # # # Create a compound of all objects
+        parts_list = [far_pole,
                       back_pole,
                       floor_panel]
         
