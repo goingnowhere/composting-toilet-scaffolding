@@ -51,8 +51,19 @@ joint_radius = joint_diameter / 2
 #######################
 side_panel_seperation_x = board_length + side_panel_board_thickness
 
-# Key planes in the y and z direction
-#####################################
+# Key planes in the x, y and z direction for a cabin structure
+##############################################################
+
+# In the x direction there are 3 key equadistant planes
+# The plane for the left side panel joints.
+left_x = 0
+# The plane for the mid left floor and roof joints.
+left_mid_x = side_panel_seperation_x / 3
+# The plane for the mid right floor and roof joints.
+right_mid_x = side_panel_seperation_x * 2 / 3
+# The plane for the right side panel joints. # TODO: Review if this is used.
+right_x = side_panel_seperation_x
+
 
 # In the y direction (front to back) there are 4 key planes
 # The plane in which all the front joints are located
@@ -108,3 +119,21 @@ wall_top_back_centre = App.Vector(0, back_y, wall_top_z)
 # Roof Joints
 roof_front_centre = App.Vector(0, front_y, front_roof_z)
 roof_back_centre = App.Vector(0, back_y, back_roof_z)
+
+
+# Centre Vectors for Floor and Roof Joints
+##########################################
+
+# Front Joints
+front_floor_left_mid_centre = App.Vector(left_mid_x, front_y, floor_z)
+front_floor_right_mid_centre = App.Vector(right_mid_x, front_y, floor_z)
+front_roof_left_mid_centre = App.Vector(left_mid_x, front_y, front_roof_z)
+front_roof_right_mid_centre = App.Vector(right_mid_x, front_y, front_roof_z)
+
+# Back Joints
+back_floor_left_mid_centre = App.Vector(left_mid_x, back_y, floor_z)
+back_floor_right_mid_centre = App.Vector(right_mid_x, back_y, floor_z)
+back_seat_left_mid_centre = App.Vector(left_mid_x, back_y, seat_support_z)
+back_seat_right_mid_centre = App.Vector(right_mid_x, back_y, seat_support_z)
+back_roof_left_mid_centre = App.Vector(left_mid_x, back_y, back_roof_z)
+back_roof_right_mid_centre = App.Vector(right_mid_x, back_y, back_roof_z)

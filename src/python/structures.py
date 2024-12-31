@@ -27,11 +27,11 @@ class Side_Panel:
         ###############
 
         # Create ground joints
-        ground_front_joint = Short_T(freecad_document = freecad_document, #TODO Change fitting to Long/Short T and rotate sifferently
+        ground_front_joint = Short_T(freecad_document = freecad_document,
                                            fitting_label = "Ground_Front_Joint",
                                            rotation = App.Rotation(0, 90, 90),
                                            centre = ground_front_centre)
-        ground_near_joint = Four_Way_Cross(freecad_document = freecad_document, #TODO change rotation so that sides dont protrude.
+        ground_near_joint = Four_Way_Cross(freecad_document = freecad_document, 
                                            fitting_label = "Ground_Near_Joint",
                                            rotation = App.Rotation(90, 0, 0),
                                            centre = ground_near_centre)
@@ -166,6 +166,10 @@ class Side_Panel:
                 App.Vector(0, 0, 0))
         Draft.move(panel_1, App.Vector(x_panel_offset, pole_radius, pole_radius + floor_z))
 
+        # TODO: Split single panel into 2-
+
+        # TODO: Add fixings for panels.
+
 
         # Create a part containing all objects
         ######################################
@@ -267,6 +271,23 @@ class Urinal_Floor:
 
 
         # TODO: Add joints for Rear and Front
+        front_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = front_floor_left_mid_centre)
+        front_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = front_floor_right_mid_centre)
+        back_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = back_floor_left_mid_centre)
+        back_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 180),
+                                           centre = back_floor_right_mid_centre)
+
 
 
         # # # Create a compound of all objects
@@ -274,7 +295,11 @@ class Urinal_Floor:
                       near_pole,
                       far_pole,
                       back_pole,
-                      floor_panel]
+                      floor_panel,
+                      front_left_mid_joint.fitting,
+                      front_right_mid_joint.fitting,
+                      back_left_mid_joint.fitting,
+                      back_right_mid_joint.fitting]
         
         # Create compound
         structure = freecad_document.addObject("App::Part", structure_label)
