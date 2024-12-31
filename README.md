@@ -59,7 +59,7 @@ For the composting cabin the liquid waste is separated at the toilet. This enabl
 
 The files contained in this repository primarily deal with the design of the
 structure. They consist of a set of python files in directory /src/python
-with extension ".py". There two sorts of python files:
+scriptswith extension ".py". There two sorts of python files:
 
 - **Macro files** - These are files that are used to generate 3d models in the
 open source software [FreeCAD](https://www.freecad.org/). To use FreeCAD to
@@ -67,18 +67,17 @@ generate the models use the Freecad menu Macro > Macros to navigate to the
 file you wish to use. The FreeCAD version used for this project is 0.21.2.
 Currently the following Macro files have been created:
 
-    - XXX_simple.py - Draws a a component of type XXX.
-    - XXX_test.py - Tests all the use of the XXX component in the
+    - XXX_simple.py - Draws a fiting or structure of type XXX.
+    - XXX_test.py - Tests all the use of the XXX fitting or structure in the
     - context of other components.
-    - TODO add other files
-- **Support Files** - 
+
+- **Support Files** - These define the key parameters, fittings and structure classes used to build composting toilet models:
  
     - parameters.py - contains key parameters upon which the design is based.
     For example seat_height_from_ground specifies the height in millimeters
     that the toilet seat needs to above the ground.
-    - fittings.py - this contains classes used to create scafold fittings.
-    of scaffolding fittings.
-    - side_panel.py contains the class to generate a modular Side Panel
+    - fittings.py - contains classes used to create scaffolding fittings.
+    - structures.py contains the class to generate different structures taht are combined to create a composting toilet for eaxmple the modular Side Panel
 
 
 ## Appendix 1: Scafolding Join Components
@@ -91,7 +90,8 @@ These are listed below:
 - [Side Outlet T](https://pipedreamfittings.com/product/side-outlet-tee-42mm-c42/). Used to attach 3 poles in a T shape to an existing pole or used as a normal T where it is necessary to view the location of each of the poles at the top of the T. Used extensively in Side Panel Construction.
 - [Four Way Cross](https://pipedreamfittings.com/product/4-way-cross-with-central-tube-48mm-d48/). Used to attach 4 poles in a cross shape to an existing pole. A couple are used in Side Panel construction.
 - [Long T](https://pipedreamfittings.com/product/long-tee-48mm-key-clamp-fitting/). Used to attach 3 poles in a T shape.
-- [Short T](https://pipedreamfittings.com/product/short-tee-48mm-key-clamp-fitting/). Used to attach 3 poles in a T shape. Three are is used in Side Panel construction.
+- [Short T](https://pipedreamfittings.com/product/short-tee-48mm-key-clamp-fitting/). Used to attach 2 poles in a T shape. Three are is used in Side Panel construction.
+- [Two Socket Cross](https://pipedreamfittings.com/product/two-socket-cross-48mm-key-clamp-fitting/). Used to attach 2 poles to an existing pole. They are used in Side Panel construction.
 - [Double Sided Collar](https://pipedreamfittings.com/product/double-sided-collar-plate-90-48mm-d48-2/). Used to attach plywood panels to scafolding. Can handle boards of greater than 10mm thickness.
 - [Double Fixing Pad](https://pipedreamfittings.com/product/double-fixing-pad-48mm-d48/). Used to attach plywood panels to scafolding. Can handle boards of greater than 10mm thickness.
 - [Rightangle Crossover](https://pipedreamfittings.com/product/90-crossover-48mm-d48/). Used as slots for rear and front sections.

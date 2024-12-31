@@ -1,11 +1,11 @@
-# This FreeCAD macro script makes a side panel
+# This FreeCAD macro script makes a Urinal Floor
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from urinal_floor import Urinal_Floor
+from structures import Urinal_Floor
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")

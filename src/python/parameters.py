@@ -4,8 +4,8 @@
 
 # TODO see if these can be set as constants - god my python is rubbish.
 
-#  Import the packages that we need - TODO check that all of these are needed
-# import FreeCAD
+#  Import the packages that we need 
+import FreeCAD as App
 
 
 # Parameterized Size Variables in mm
@@ -29,35 +29,82 @@ other_board_thickness = 10 # The tickness of the boards used for the walls and r
 seat_height_from_ground = 1100 # The height that the toilet seat has to be from the ground to enable a solid waste container to be placed underneath.
 seat_depth = 600 # The distance from the back wall to the edge of the seat.
 seat_height_from_floor = 450 # The heignt the seat is from the floor of the structure
-roof_height_from_floor = 2100 # The distance between the floor of the structure and the roof of the structure.
-roof_pitch_differance = 200 # The distance the roof rises from back to front.
-wall_top_from_roof = 250 # The distance between the roof of the structure and the top of the floor.
+back_roof_height_from_floor = 2000 # The distance from the floor to the roof at the rear of the structure.
+front_roof_height_from_floor = 2200 # The distance from the floor to the roof at the front of the structure.
+wall_height_from_floor = 1900 # The distance from the floor and the top of the walls.
 max_pole_underground = 500 # The maximum amount the poles will be sunk into the ground. Note on a slope only the higest points would be sunk in that much.
+# TODO Check if this is used
 board_overlap = 12 # The amount the boards are routed to overlap the scafolding pole. This should be a circular rout matching the diameter of the scaffolding pole as far as possible
 
 
-# Calcualted values based upon above parameters
+# Calculated values based upon above parameters
+###############################################
+###############################################
 
+# Diameters and radii
+#####################
 joint_diameter = pole_diameter + joint_wall_thickness * 2 # The overall diameter of the joint.
+pole_radius = pole_diameter / 2
+joint_radius = joint_diameter / 2
 
-building_height = roof_height_from_floor + (seat_height_from_ground - seat_height_from_floor) # The overall heignt of the building
-# FreeCAD.Console.PrintMessage("Building height: ")
-# FreeCAD.Console.PrintMessage(building_height)
-# FreeCAD.Console.PrintMessage("mm\n")
+# Side panel separation
+#######################
+side_panel_seperation_x = board_length + side_panel_board_thickness
 
-pole_height = building_height + max_pole_underground # The length of the upright poles taking account of them being sunk into the ground.
-# FreeCAD.Console.PrintMessage("Pole height: ")
-# FreeCAD.Console.PrintMessage(pole_height)
-# FreeCAD.Console.PrintMessage("mm\n")
+# Key planes in the y and z direction
+#####################################
 
-pole_width = board_width + pole_diameter - board_overlap * 2 # The distance between the front and back poles.
-# FreeCAD.Console.PrintMessage("Pole width: ")
-# FreeCAD.Console.PrintMessage(pole_width)
-# FreeCAD.Console.PrintMessage("mm\n")
+# In the y direction (front to back) there are 4 key planes
+# The plane in which all the front joints are located
+front_y = 0
+# The plane in which all the back joints are located
+back_y = front_y + board_width
+# The plane that contains the joints supports the seat or urinal floor.
+far_y = back_y - (seat_depth - pole_diameter)
+# The plane that supports the cabin floor and the urinal floor
+near_y = (front_y + far_y) / 2
 
-middle_back_pole_height = max_pole_underground + seat_height_from_ground - floor_board_thickness - pole_diameter 
-# The length of the upright poles taking account of them being sunk into the ground.
-# TODO account for flange on joint. Also add this calc to earlier stuff where apropriate (probably just the heights)
-# FreeCAD.Console.PrintMessage("Middle back pole height: ")
-# FreeCAD.Console.PrintMessage(middle_back_pole_height)
-# FreeCAD.Console.PrintMessage("mm\n")
+# In the z direction (down to up) there are
+# The plane for the joints at ground level
+ground_z = 0
+# The plane for the joints at seat level.
+seat_z = seat_height_from_ground + pole_diameter + floor_board_thickness * 2
+# The plane for the joints used for seat back support.
+# Needed so that wheelie bins can slide straight in without obstructions.
+seat_support_z = seat_z + joint_diameter
+# The plane for joints at floor level.
+floor_z = seat_z - seat_height_from_floor
+# The plane for joints for the top of the side wall
+wall_top_z = floor_z + wall_height_from_floor
+# The plane for joints at the front of the roof.
+front_roof_z = floor_z + front_roof_height_from_floor
+# The plane for joints at the rear of the roof.
+back_roof_z = floor_z + back_roof_height_from_floor
+
+# Vectors for Side_Panel joints.
+################################
+
+# Ground Joints
+ground_front_centre = App.Vector(0, front_y, ground_z)
+ground_near_centre = App.Vector(0, near_y, ground_z)
+ground_far_centre = App.Vector(0, far_y, ground_z)
+ground_back_centre = App.Vector(0, back_y, ground_z)
+
+# Floor Joints
+floor_front_centre = App.Vector(0, front_y, floor_z)
+floor_near_centre = App.Vector(0, near_y, floor_z)
+floor_far_centre = App.Vector(0, far_y, floor_z)
+floor_back_centre = App.Vector(0, back_y, floor_z)
+
+# Seat Joints
+seat_far_centre = App.Vector(0, far_y, seat_z)
+seat_back_centre = App.Vector(0, back_y, seat_z)
+seat_back_support_centre = App.Vector(0, back_y, seat_z)
+
+# Wall Top Joints
+wall_top_front_centre = App.Vector(0, front_y, wall_top_z)
+wall_top_back_centre = App.Vector(0, back_y, wall_top_z)
+
+# Roof Joints
+roof_front_centre = App.Vector(0, front_y, front_roof_z)
+roof_back_centre = App.Vector(0, back_y, back_roof_z)

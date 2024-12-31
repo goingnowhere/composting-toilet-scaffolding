@@ -4,8 +4,7 @@
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
-
-from side_panel import Side_Panel
+from structures import Side_Panel
 from fittings import display_variable
 
 # Set Up Freecad and Select Workbench
@@ -16,8 +15,6 @@ Gui.activeDocument().activeView().viewDefaultOrientation()
 Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
-# Draw a simple side outlet T object
+# Draw a test Side Panel object
 side_panel = Side_Panel(freecad_document = document,
                         structure_label = "Side_Panel")
-display_variable("ground_front_left", side_panel.ground_front_left)
-display_variable("ground_front_right", side_panel.ground_front_right)

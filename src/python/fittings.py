@@ -389,9 +389,9 @@ class Short_T:
         t_down = Draft.cut(t_down, t_across_inside)
         t_down.Label = "T_Down"
         # Create a compond of the two objects
-        fitting = freecad_document.addObject("App::Part", fitting_label)
-        fitting.addObjects([t_across, t_down])
+        self.fitting = freecad_document.addObject("App::Part", fitting_label)
+        self.fitting.addObjects([t_across, t_down])
         # Rotate
-        fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        self.fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
         # Move
-        Draft.move(fitting, centre)
+        Draft.move(self.fitting, centre)
