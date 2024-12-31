@@ -1,15 +1,11 @@
-# This defines a Single Sided Clip Class It can be run as a
-# FreeCAD macro to display the clip for basic testing
-# illustration purposes
+# This FreeCAD script makes a Single Dided Clip Fitting 
+# for basic testing and illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
 from fittings import Single_Sided_Clip
-
-
-
 
 ## Draw Fitting
 ###############        
