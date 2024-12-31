@@ -395,3 +395,47 @@ class Short_T:
         self.fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
         # Move
         Draft.move(self.fitting, centre)
+
+
+class Two_Socket_Cross:
+    """ A class representing a Two Socket Cross object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/two-socket-cross-48mm-key-clamp-fitting/"""
+    
+    distance_from_centre = 135 / 2
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Two Socket Cross in the freecad_document, with label attribute
+        given by parameter fitting_lable and centre and rotation given by the
+        corresponding parameters.  """
+        # Strategy draw all the outside tubes, place them in the correct location and rotation,
+        # then cut 48mm diameter solids
+        distance_from_centre = Two_Socket_Cross.distance_from_centre
+        t_across_start = App.Vector( -joint_radius,0,0)
+        t_across_end = App.Vector(joint_radius,0,0)                           
+        t_across_line = Draft.make_line(t_across_start,t_across_end)
+        t_down_start = App.Vector(0, 0, -distance_from_centre)
+        t_down_end = App.Vector(0, 0, distance_from_centre)
+        t_down_line = Draft.make_line(t_down_start,t_down_end)
+        #Draw solid sections
+        t_across = Arch.makePipe(t_across_line, diameter=joint_diameter)
+        t_across.WallThickness = joint_wall_thickness
+        t_down_inside = Arch.makePipe(t_down_line, diameter=pole_diameter)
+        t_across = Draft.cut(t_across, t_down_inside)
+        t_across.Label = "T_Across"
+        t_down = Arch.makePipe(t_down_line, diameter=joint_diameter)
+        t_down.WallThickness = joint_wall_thickness
+        t_across_inside = Arch.makePipe(t_across_line, diameter=pole_diameter)
+        t_down = Draft.cut(t_down, t_across_inside)
+        t_down.Label = "T_Down"
+        # Create a compond of the two objects
+        self.fitting = freecad_document.addObject("App::Part", fitting_label)
+        self.fitting.addObjects([t_across, t_down])
+        # Rotate
+        self.fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(self.fitting, centre)
