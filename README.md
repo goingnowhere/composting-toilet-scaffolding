@@ -76,6 +76,11 @@ The components are constructed once and stored whole to enable easy set up and s
 </p>
 
 - **Urinal Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof.When constructing urinals it is the second step.
+
+<p align="center">
+    <img src="images/urinal_back.png" alt="A Urinal Back Structure">
+</p>
+
 - **Cabin Partition** These are simple plywood sheets cut to size that form the seperation between individual composting toilet cabins. There are 2 for each cabin block. After the roof has been fixed they slide into the cabin floor and rear ready for the cabin front to be attached. They are attached to the cabin front via a single sided clip 
 - **Cabin Front** This is a plywood and scaffolding construction that contains doors to the cabins. It is slotted into the fixings at the front of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. It is also fixed to the panel sides.
 - **Urinal Front** These are plywood and scafolding constructions that provide privacy to the urinals. They are slotted into the fixings at the front of the Urinal Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. They are also fixed to the panel sides. There are 2 for each urinal block.

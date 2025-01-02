@@ -529,16 +529,17 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
         self.structure = structure
 
 class Cabin_Back(Structure):
-    """ A class representing a Cabin Rear structure used as part of
+    """ A class representing a Cabin Back structure used as part of
     a composting toilet project."""
     
-    
+    board_start_y = back_y - joint_radius
+
     def __init__(self,
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
                 centre = App.Vector(0,0,0)):
-        """ Constructs a Cabin_Rear in the freecad_document, with label attribute
+        """ Constructs a Cabin_Back in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
 
@@ -571,11 +572,10 @@ class Cabin_Back(Structure):
         right_mid_pole = make_pole(right_mid_pole_line, "Right_Mid_Pole")
 
         # Make Board
-        board_overlap = Double_Fixing_Pad.width / 2
+        board_start_z = seat_z + pole_radius + floor_board_thickness
         back_panel_rect = Draft.makeRectangle(board_length, 
-                                              back_roof_z - 
-                                              seat_support_z - 
-                                              pole_diameter)
+                                              wall_top_z - 
+                                              board_start_z)
         back_panel = Arch.makePanel(back_panel_rect, 
                                     thickness = side_panel_board_thickness)
         back_panel.Label = "Back_Panel"
@@ -584,8 +584,82 @@ class Cabin_Back(Structure):
                 App.Rotation(0, 0, 90),
                 App.Vector(0, 0, 0))
         Draft.move(back_panel, App.Vector(0,
-                        back_y + side_panel_board_thickness / 2,
-                        seat_support_z + pole_radius))
+                        Cabin_Back.board_start_y,
+                        board_start_z))
+
+        # TODO: Add fixings for boards
+
+        # Create a parts list
+        parts_list = [roof_left_mid_joint.fitting,
+                      roof_right_mid_joint.fitting,
+                      left_mid_pole,
+                      right_mid_pole,
+                      back_panel]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        centre,
+                        parts_list)
+        
+class Urinal_Back(Structure):
+    """ A class representing a Urinal Back structure used as part of
+    a composting toilet project."""
+    
+    board_start_y = back_y - joint_radius
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Urinal_Back in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        left_offset = App.Vector(pole_radius, 0, 0)
+        right_offset = App.Vector(side_panel_seperation_x - pole_radius, 0, 0)
+
+        # Make joints
+
+        roof_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 0),
+                                           centre = back_roof_left_mid_centre)
+        roof_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 0),
+                                           centre = back_roof_right_mid_centre)
+
+        # Make poles
+
+        pole_offset = App.Vector(0, 0, pole_radius)
+
+        left_mid_pole_start = back_floor_left_mid_centre + pole_offset
+        left_mid_pole_end = back_roof_left_mid_centre - pole_offset
+        left_mid_pole_line = Draft.make_line(left_mid_pole_start, left_mid_pole_end)
+        left_mid_pole = make_pole(left_mid_pole_line, "Left_Mid_Pole")
+
+        right_mid_pole_start = back_floor_right_mid_centre + pole_offset
+        right_mid_pole_end = back_roof_right_mid_centre - pole_offset
+        right_mid_pole_line = Draft.make_line(right_mid_pole_start, right_mid_pole_end)
+        right_mid_pole = make_pole(right_mid_pole_line, "Right_Mid_Pole")
+
+        # Make Board
+        board_start_z = floor_z + pole_radius + floor_board_thickness
+        back_panel_rect = Draft.makeRectangle(board_length, 
+                                              wall_top_z - 
+                                              board_start_z)
+        back_panel = Arch.makePanel(back_panel_rect, 
+                                    thickness = side_panel_board_thickness)
+        back_panel.Label = "Back_Panel"
+        back_panel.Placement = App.Placement(
+                App.Vector(0, 0, 0),
+                App.Rotation(0, 0, 90),
+                App.Vector(0, 0, 0))
+        Draft.move(back_panel, App.Vector(0,
+                        Urinal_Back.board_start_y,
+                        board_start_z))
 
         # TODO: Add fixings for boards
 

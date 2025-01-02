@@ -1,11 +1,11 @@
-# This FreeCAD macro script makes a Cabin Back
+# This FreeCAD macro script makes a Urinal Back
 # for basic testing illustration purposes
 
 #  Import the packages that we need
 import FreeCAD as App
 import FreeCADGui as Gui
 
-from structures import Cabin_Back
+from structures import Urinal_Back
 
 # Set Up Freecad and Select Workbench
 App.Console.PrintMessage("Starting FreeCAD generation.\n")
@@ -16,5 +16,5 @@ Gui.runCommand('Std_OrthographicCamera',1)
 Gui.activateWorkbench("BIMWorkbench21")
 
 # Draw a simple side outlet T object
-cabin_back = Cabin_Back(freecad_document = document,
-                        structure_label = "Cabin_Back")
+urinal_back = Urinal_Back(freecad_document = document,
+                        structure_label = "Urinal_Back")
