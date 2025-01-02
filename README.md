@@ -63,19 +63,23 @@ The components are constructed once and stored whole to enable easy set up and s
     <img src="images/cabin_floor.png" alt="A Cabin Floor Structure">
 </p>
 
-
 - **Urinal Floor** This is a simple panel consisting of a single plywood sheet attached to 4 scafolding lengths. It is the first step in connecting two side panels together to create a urinal.
 
 <p align="center">
     <img src="images/urinal_floor.png" alt="A Urinal Floor Structure">
 </p>
 
-- **Cabin Rear** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof. The cabin rear also contains wooden guides for fixing cabin partitions. When constructing urinal it is the third step.
-- **Urinal Rear** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof.When constructing urinals it is the second step.
-- **Roof** This is a plywood based panel attached to poles and fittings. It is fixed back to fixings added when fixing cabin or urinal rears. It is fixed at the front by means of poles slid through side panels. The front fixing is done at the same time as Cabin or Urinal Front. It is the step conducted after fixing the rear components.
+- **Cabin Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof. The cabin rear also contains wooden guides for fixing cabin partitions. When constructing urinal it is the third step.
+
+<p align="center">
+    <img src="images/cabin_back.png" alt="A Cabin Back Structure">
+</p>
+
+- **Urinal Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof.When constructing urinals it is the second step.
 - **Cabin Partition** These are simple plywood sheets cut to size that form the seperation between individual composting toilet cabins. There are 2 for each cabin block. After the roof has been fixed they slide into the cabin floor and rear ready for the cabin front to be attached. They are attached to the cabin front via a single sided clip 
 - **Cabin Front** This is a plywood and scaffolding construction that contains doors to the cabins. It is slotted into the fixings at the front of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. It is also fixed to the panel sides.
 - **Urinal Front** These are plywood and scafolding constructions that provide privacy to the urinals. They are slotted into the fixings at the front of the Urinal Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. They are also fixed to the panel sides. There are 2 for each urinal block.
+- **Roof** This is a plywood based panel attached to poles and fittings. It is fixed back to fixings added when fixing cabin or urinal rears. It is fixed at the front by means of poles slid through side panels. The front fixing is done at the same time as Cabin or Urinal Front. It is the step conducted after fixing the rear components.
 - **Cabin Steps** This is a folding plywood and scafoliding construction that unfolds and fixes to the Cabin Floor. They run the entire length of the cabin.
 - **Urinal Steps** This is a folding plywood and scafoliding construction that unfolds and fixes to the Urinal Floor. They sit in the center of the urinal cabin between the two urinal fronts.
 

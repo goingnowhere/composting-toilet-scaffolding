@@ -9,7 +9,34 @@ from BasicShapes import Shapes
 from parameters import *
 from fittings import *
 
-class Side_Panel:
+class Structure:
+    """ A class representing a generic component structure. It should 
+    be subclassed by all component structures. Subclasses should create
+    a list of parts and then call the class constructor with that list."""
+    
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0),
+                parts_list = []):
+        """ Constructs a Structure in the freecad_document, from the parts
+        given in the parts_list parameter, with label attribute  given by
+        parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+        
+        # Create structure
+        structure = freecad_document.addObject("App::Part", structure_label)
+        structure.addObjects(parts_list)
+
+        # # Rotate
+        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(structure, centre)
+        self.structure = structure
+
+class Side_Panel: # TODO: Refactor to inherit from Structure Class
     """ A class representing a modular side panel used in constructing
     composting toilets. The panel can be used on both left and right
     and can be configured with either a urinal floor or a sit down toilet floor."""
@@ -216,7 +243,7 @@ class Side_Panel:
         Draft.move(structure, centre)
         self.structure = structure
 
-class Urinal_Floor:
+class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
     """ A class representing a Urinal Floor that would 
     form part of a set of composting toilet blocks."""
     
@@ -270,7 +297,7 @@ class Urinal_Floor:
         # TODO: Add fixings for boards
 
 
-        # TODO: Add joints for Rear and Front
+        # Add joints for Rear and Front
         front_left_mid_joint  = Short_T(freecad_document = freecad_document,
                                            fitting_label = "Front_Left_Mid_Joint",
                                            rotation = App.Rotation(0, 0, 180),
@@ -313,7 +340,7 @@ class Urinal_Floor:
 
 
 
-class Cabin_Ground:
+class Cabin_Ground: # TODO: Refactor to inherit from Structure Class
     """ A class representing a Cabin Ground structure used as part of
     a composting toilet project. The solid waste container sits
     snugly between the Cabin Ground and the toilet seat that is
@@ -375,7 +402,7 @@ class Cabin_Ground:
         self.structure = structure
 
 
-class Cabin_Floor:
+class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
     """ A class representing a Cabin Floor that would 
     form part of a set of composting toilet blocks."""
     
@@ -500,3 +527,78 @@ class Cabin_Floor:
         # Move
         Draft.move(structure, centre)
         self.structure = structure
+
+class Cabin_Back(Structure):
+    """ A class representing a Cabin Rear structure used as part of
+    a composting toilet project."""
+    
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Cabin_Rear in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        left_offset = App.Vector(pole_radius, 0, 0)
+        right_offset = App.Vector(side_panel_seperation_x - pole_radius, 0, 0)
+
+        # Make joints
+
+        roof_left_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Left_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 0),
+                                           centre = back_roof_left_mid_centre)
+        roof_right_mid_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Right_Mid_Joint",
+                                           rotation = App.Rotation(0, 0, 0),
+                                           centre = back_roof_right_mid_centre)
+
+        # Make poles
+
+        pole_offset = App.Vector(0, 0, pole_radius)
+
+        left_mid_pole_start = back_seat_left_mid_centre + pole_offset
+        left_mid_pole_end = back_roof_left_mid_centre - pole_offset
+        left_mid_pole_line = Draft.make_line(left_mid_pole_start, left_mid_pole_end)
+        left_mid_pole = make_pole(left_mid_pole_line, "Left_Mid_Pole")
+
+        right_mid_pole_start = back_seat_right_mid_centre + pole_offset
+        right_mid_pole_end = back_roof_right_mid_centre - pole_offset
+        right_mid_pole_line = Draft.make_line(right_mid_pole_start, right_mid_pole_end)
+        right_mid_pole = make_pole(right_mid_pole_line, "Right_Mid_Pole")
+
+        # Make Board
+        board_overlap = Double_Fixing_Pad.width / 2
+        back_panel_rect = Draft.makeRectangle(board_length, 
+                                              back_roof_z - 
+                                              seat_support_z - 
+                                              pole_diameter)
+        back_panel = Arch.makePanel(back_panel_rect, 
+                                    thickness = side_panel_board_thickness)
+        back_panel.Label = "Back_Panel"
+        back_panel.Placement = App.Placement(
+                App.Vector(0, 0, 0),
+                App.Rotation(0, 0, 90),
+                App.Vector(0, 0, 0))
+        Draft.move(back_panel, App.Vector(0,
+                        back_y + side_panel_board_thickness / 2,
+                        seat_support_z + pole_radius))
+
+        # TODO: Add fixings for boards
+
+        # Create a parts list
+        parts_list = [roof_left_mid_joint.fitting,
+                      roof_right_mid_joint.fitting,
+                      left_mid_pole,
+                      right_mid_pole,
+                      back_panel]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        centre,
+                        parts_list)
+
