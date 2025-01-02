@@ -24,19 +24,50 @@ The design should
 - Should be able to cope with expected volumes (to be determined) of liquid and solid matter
 - TODO More
 
+## Design Costings
+
+A [spreadsheet](https://docs.google.com/spreadsheets/d/10gVWtJp33p0cb3BE8hLPdwHnwx7mQESiJH0xtRfMGkw/edit?usp=sharing) exists outlinging the costs expressed in both finacial costs as well as volunteer time needed for construction setup strike and maintainance of the structures.
+
 ## Scaffolding Approach
 
-The primary design approach is to construct scaffolding based interchangeable components that are easily connected together to create either:
+The primary design approach is to construct scaffolding based interchangeable component structures that are easily connected together to create either:
 
 - Composting Toilet Cabins
 - Urinals
 
-The components are constructed once and stored whole to enable easy set up and strike. These components are as follows:
+The approach is illustrated in this partially constructed model which has a urinal floor on the left hand side and a toilet cabin floor on the right hand side. Each cabin floor section can fit 3 individual cabins.:
+
+<p align="center">
+    <img src="images/modular_design.png" alt="Image of three side panels structure. The first and second seperated by a urinal floor structure and the second and third seperated by cabin ground and cabin floor structures.">
+</p>
+
+The components are constructed once and stored whole to enable easy set up and strike. The components are as follows:
 
 - **Side Panel** This is modular panel that is the key to construction. It´s poles are embedded into the ground using holes dug by a power auger. This provides stability, wind resistance and enables the structure to be placed on unlevel ground. It has extensive joints that set the correct distances for all other components. It is symetric so that it can be used as the left, right or senter panel of any construction.
+
+<p align="center">
+    <img src="images/side_panel.png" alt="A Side Panel Structure">
+</p>
+
 - **Cabin Ground** This is a simple board with fittings that scafolding poles slide through to attach to side panels. It is used to provide a level base for solid waste containers. This is so that the containers fit exactly between the Cabin Ground and the Cabin Floor eliminating access for flies. When constructing cabins it is the second step.
+
+<p align="center">
+    <img src="images/cabin_ground.png" alt="A Cabin Ground Structure">
+</p>
+
 - **Cabin Floor** This is a simple panel consisting of a 3 plywood attached to 4 scafolding lengths. The cabin floor also contains wooden guides for fixing cabin partitions. The cabin floor contains fittings for fixing the cabin steps. It is the first step in connecting two side panels together.
+
+<p align="center">
+    <img src="images/cabin_floor.png" alt="A Cabin Floor Structure">
+</p>
+
+
 - **Urinal Floor** This is a simple panel consisting of a single plywood sheet attached to 4 scafolding lengths. It is the first step in connecting two side panels together.
+
+<p align="center">
+    <img src="images/urinal_floor.png" alt="A Urinal Floor Structure">
+</p>
+
 - **Cabin Rear** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof. The cabin rear also contains wooden guides for fixing cabin partitions. When constructing urinal it is the third step.
 - **Urinal Rear** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof.When constructing urinals it is the second step.
 - **Roof** This is a plywood based panel attached to poles and fittings. It is fixed back to fixings added when fixing cabin or urinal rears. It is fixed at the front by means of poles slid through side panels. The front fixing is done at the same time as Cabin or Urinal Front. It is the step conducted after fixing the rear components.
