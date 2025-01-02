@@ -49,20 +49,20 @@ The components are constructed once and stored whole to enable easy set up and s
     <img src="images/side_panel.png" alt="A Side Panel Structure">
 </p>
 
-- **Cabin Ground** This is a simple board with scafolding poles that attach to side panels. It is used to provide a level base for solid waste containers. This is so that the containers fit exactly between the Cabin Ground and the Cabin Floor eliminating access for flies. When constructing cabins it is the second step.
+- **Cabin Ground** This is a simple board with scafolding poles that attach to side panels. It is used to provide a level base for solid waste containers. This is so that the containers fit exactly between the Cabin Ground and the Cabin Floor eliminating access for flies. Along with the Cabin Ground it is the first step in connecting two side panels together to create sit down cabins.
 
 <p align="center">
     <img src="images/cabin_ground.png" alt="A Cabin Ground Structure">
 </p>
 
-- **Cabin Floor** This is a simple panel consisting of a 3 plywood attached to 4 scafolding lengths. The cabin floor also contains wooden guides for fixing cabin partitions. The cabin floor contains fittings for fixing the cabin steps. It is the first step in connecting two side panels together.
+- **Cabin Floor** This is a simple panel consisting of a 3 plywood attached to 4 scafolding lengths. The cabin floor also contains wooden guides for fixing cabin partitions. The cabin floor contains fittings for fixing the cabin steps. Along with the Cabin Ground it is the first step in connecting two side panels together to create sit down cabins.
 
 <p align="center">
     <img src="images/cabin_floor.png" alt="A Cabin Floor Structure">
 </p>
 
 
-- **Urinal Floor** This is a simple panel consisting of a single plywood sheet attached to 4 scafolding lengths. It is the first step in connecting two side panels together.
+- **Urinal Floor** This is a simple panel consisting of a single plywood sheet attached to 4 scafolding lengths. It is the first step in connecting two side panels together to create a urinal.
 
 <p align="center">
     <img src="images/urinal_floor.png" alt="A Urinal Floor Structure">
