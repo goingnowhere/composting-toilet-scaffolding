@@ -69,13 +69,13 @@ The components are constructed once and stored whole to enable easy set up and s
     <img src="images/urinal_floor.png" alt="A Urinal Floor Structure">
 </p>
 
-- **Cabin Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof. The cabin rear also contains wooden guides for fixing cabin partitions. When constructing urinal it is the third step.
+- **Cabin Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. The cabin rear also contains wooden guides for fixing cabin partitions. When constructing urinal it is the third step.
 
 <p align="center">
     <img src="images/cabin_back.png" alt="A Cabin Back Structure">
 </p>
 
-- **Urinal Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. NOTE when sliding the pole through for the top fixing the roof fixings (6 double figing pads) must be added ready to attach the roof.When constructing urinals it is the second step.
+- **Urinal Back** This is a plywood based panel attached to poles and fittings. It is slotted into the fixings at the back of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height. It is also fided to the panel sides. When constructing urinals it is the second step.
 
 <p align="center">
     <img src="images/urinal_back.png" alt="A Urinal Back Structure">
