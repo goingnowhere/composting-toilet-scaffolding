@@ -43,13 +43,13 @@ The approach is illustrated in this partially constructed model which has a urin
 
 The components are constructed once and stored whole to enable easy set up and strike. The components are as follows:
 
-- **Side Panel** This is modular panel that is the key to construction. It´s poles are embedded into the ground using holes dug by a power auger. This provides stability, wind resistance and enables the structure to be placed on unlevel ground. It has extensive joints that set the correct distances for all other components. It is symetric so that it can be used as the left, right or senter panel of any construction.
+- **Side Panel** This is modular panel that is the key to construction. It´s poles are embedded into the ground using holes dug by a power auger. This provides stability, wind resistance and enables the structure to be placed on unlevel ground. It has extensive joints that set the correct distances for all other components. It is symetric so that it can be used as the left, right or center panel of any construction.
 
 <p align="center">
     <img src="images/side_panel.png" alt="A Side Panel Structure">
 </p>
 
-- **Cabin Ground** This is a simple board with fittings that scafolding poles slide through to attach to side panels. It is used to provide a level base for solid waste containers. This is so that the containers fit exactly between the Cabin Ground and the Cabin Floor eliminating access for flies. When constructing cabins it is the second step.
+- **Cabin Ground** This is a simple board with scafolding poles that attach to side panels. It is used to provide a level base for solid waste containers. This is so that the containers fit exactly between the Cabin Ground and the Cabin Floor eliminating access for flies. When constructing cabins it is the second step.
 
 <p align="center">
     <img src="images/cabin_ground.png" alt="A Cabin Ground Structure">
