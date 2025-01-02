@@ -3,9 +3,11 @@
 This repository contains a set of python files that are used to generate the components and full designs for scaffolding based composting toilets and urinals. This document contains the following sections 
 
 - Design Goals
+- Design Costings
 - Scaffolding Approach
 - Plumbing Approach
 - Design Tools
+- Appendix: Scaffolding Joint Components
 
 ## Design Goals
 
@@ -111,7 +113,7 @@ Currently the following Macro files have been created:
     - structures.py contains the class to generate different structures taht are combined to create a composting toilet for eaxmple the modular Side Panel
 
 
-## Appendix 1: Scafolding Join Components
+## Appendix: Scafolding Joint Components
 
 The design uses various types of scafolding fittings to join pipes, panels and sections. 
 These are listed below:
