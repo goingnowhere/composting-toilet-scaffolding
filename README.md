@@ -81,8 +81,13 @@ The components are constructed once and stored whole to enable easy set up and s
     <img src="images/urinal_back.png" alt="A Urinal Back Structure">
 </p>
 
-- **Cabin Partition** These are simple plywood sheets cut to size that form the seperation between individual composting toilet cabins. There are 2 for each cabin block. After the roof has been fixed they slide into the cabin floor and rear ready for the cabin front to be attached. They are attached to the cabin front via a single sided clip 
-- **Cabin Front** This is a plywood and scaffolding construction that contains doors to the cabins. It is slotted into the fixings at the front of the Cabin Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. It is also fixed to the panel sides.
+- **Cabin Partition** These are a single pole attached to a plywood sheet and topped by a roof joint. The sheet slides into groves attached to the Cabin Back and then slots into a joint on the cabin floor. Once the roof is added the partition is secured to the froont roof pole. 
+
+<p align="center">
+    <img src="images/cabin_partition.png" alt="A Cabin Partition Structure">
+</p>
+
+- **Cabin Door** These are a plywood and scaffolding construction that attached via simple hinges to side panels or cabin partitions.
 - **Urinal Front** These are plywood and scafolding constructions that provide privacy to the urinals. They are slotted into the fixings at the front of the Urinal Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. They are also fixed to the panel sides. There are 2 for each urinal block.
 - **Roof** This is a plywood based panel attached to poles and fittings. It is fixed back to fixings added when fixing cabin or urinal rears. It is fixed at the front by means of poles slid through side panels. The front fixing is done at the same time as Cabin or Urinal Front. It is the step conducted after fixing the rear components.
 - **Cabin Steps** This is a folding plywood and scafoliding construction that unfolds and fixes to the Cabin Floor. They run the entire length of the cabin.

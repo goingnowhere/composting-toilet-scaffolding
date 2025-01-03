@@ -21,8 +21,8 @@ clip_wall_thickness = 1 # The thickness of the walls of the clips
 board_length = 2500 # Width of a standard plywood board
 board_width = 1220 # Length of a standard plywood board
 floor_board_thickness = 18 # The thickness of plywood boards used for the floor.
-side_panel_board_thickness = 10 # Thickness of boards used in side panels. This has a max of 10mm due to fittings.
-other_board_thickness = 10 # The tickness of the boards used for the walls and roof.
+side_panel_board_thickness = 9 # Thickness of boards used in side panels. This has a max of 10mm due to fittings.
+other_board_thickness = 12 # The tickness of the boards used for the walls and roof.
 
 
 # Structure measurements
@@ -58,9 +58,9 @@ side_panel_seperation_x = board_length + side_panel_board_thickness
 # The plane for the left side panel joints.
 left_x = 0
 # The plane for the mid left floor and roof joints.
-left_mid_x = side_panel_seperation_x / 3
+left_third_x = side_panel_seperation_x / 3
 # The plane for the mid right floor and roof joints.
-right_mid_x = side_panel_seperation_x * 2 / 3
+right_third_x = side_panel_seperation_x * 2 / 3
 # The plane for the right side panel joints. # TODO: Review if this is used.
 right_x = side_panel_seperation_x
 
@@ -125,15 +125,15 @@ roof_back_centre = App.Vector(0, back_y, back_roof_z)
 ##########################################
 
 # Front Joints
-front_floor_left_mid_centre = App.Vector(left_mid_x, front_y, floor_z)
-front_floor_right_mid_centre = App.Vector(right_mid_x, front_y, floor_z)
-front_roof_left_mid_centre = App.Vector(left_mid_x, front_y, front_roof_z)
-front_roof_right_mid_centre = App.Vector(right_mid_x, front_y, front_roof_z)
+front_floor_left_third_centre = App.Vector(left_third_x, front_y, floor_z)
+front_floor_right_third_centre = App.Vector(right_third_x, front_y, floor_z)
+front_roof_left_third_centre = App.Vector(left_third_x, front_y, front_roof_z)
+front_roof_right_third_centre = App.Vector(right_third_x, front_y, front_roof_z)
 
 # Back Joints
-back_floor_left_mid_centre = App.Vector(left_mid_x, back_y, floor_z)
-back_floor_right_mid_centre = App.Vector(right_mid_x, back_y, floor_z)
-back_seat_left_mid_centre = App.Vector(left_mid_x, back_y, seat_support_z)
-back_seat_right_mid_centre = App.Vector(right_mid_x, back_y, seat_support_z)
-back_roof_left_mid_centre = App.Vector(left_mid_x, back_y, back_roof_z)
-back_roof_right_mid_centre = App.Vector(right_mid_x, back_y, back_roof_z)
+back_floor_left_third_centre = App.Vector(left_third_x, back_y, floor_z)
+back_floor_right_third_centre = App.Vector(right_third_x, back_y, floor_z)
+back_seat_left_third_centre = App.Vector(left_third_x, back_y, seat_support_z)
+back_seat_right_third_centre = App.Vector(right_third_x, back_y, seat_support_z)
+back_roof_left_third_centre = App.Vector(left_third_x, back_y, back_roof_z)
+back_roof_right_third_centre = App.Vector(right_third_x, back_y, back_roof_z)

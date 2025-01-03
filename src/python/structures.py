@@ -298,22 +298,22 @@ class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
 
 
         # Add joints for Rear and Front
-        front_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Front_Left_Mid_Joint",
+        front_left_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Left_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = front_floor_left_mid_centre)
-        front_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Front_Right_Mid_Joint",
+                                           centre = front_floor_left_third_centre)
+        front_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = front_floor_right_mid_centre)
-        back_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Back_Left_Mid_Joint",
+                                           centre = front_floor_right_third_centre)
+        back_left_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Left_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = back_floor_left_mid_centre)
-        back_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Back_Right_Mid_Joint",
+                                           centre = back_floor_left_third_centre)
+        back_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = back_floor_right_mid_centre)
+                                           centre = back_floor_right_third_centre)
 
 
 
@@ -323,10 +323,10 @@ class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
                       far_pole,
                       back_pole,
                       floor_panel,
-                      front_left_mid_joint.fitting,
-                      front_right_mid_joint.fitting,
-                      back_left_mid_joint.fitting,
-                      back_right_mid_joint.fitting]
+                      front_left_third_joint.fitting,
+                      front_right_third_joint.fitting,
+                      back_left_third_joint.fitting,
+                      back_right_third_joint.fitting]
         
         # Create compound
         structure = freecad_document.addObject("App::Part", structure_label)
@@ -405,7 +405,8 @@ class Cabin_Ground: # TODO: Refactor to inherit from Structure Class
 class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
     """ A class representing a Cabin Floor that would 
     form part of a set of composting toilet blocks."""
-    
+
+    seat_start_y = far_y - pole_radius - floor_board_thickness
     
     def __init__(self,
                 freecad_document,
@@ -456,15 +457,14 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
                                        0,
                                        floor_start_z))
         
-        seat_start_y = far_y - pole_radius - floor_board_thickness
         seat_end_y = back_y + Double_Fixing_Pad.width / 2
-        seat_width = seat_end_y - seat_start_y
+        seat_width = seat_end_y - Cabin_Floor.seat_start_y
         seat_rect = Draft.makeRectangle(board_length, seat_width)
         seat_panel = Arch.makePanel(seat_rect, thickness = floor_board_thickness)
         seat_panel.Label = "Seat"
         seat_start_z = seat_z + pole_radius
         Draft.move(seat_panel, App.Vector(side_panel_board_thickness / 2,
-                                       seat_start_y,
+                                       Cabin_Floor.seat_start_y,
                                        seat_start_z))
         
         side_start_z = floor_start_z + floor_board_thickness
@@ -478,29 +478,29 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
                 App.Rotation(0, 0, 90),
                 App.Vector(0, 0, 0))
         Draft.move(side_panel, App.Vector(0,
-                                       seat_start_y + floor_board_thickness,
+                                       Cabin_Floor.seat_start_y + floor_board_thickness,
                                        side_start_z))
 
         # TODO: Add fixings for boards
 
 
         # TODO: Add joints for Rear and Front
-        front_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Front_Left_Mid_Joint",
+        front_left_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Left_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = front_floor_left_mid_centre)
-        front_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Front_Right_Mid_Joint",
+                                           centre = front_floor_left_third_centre)
+        front_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Front_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = front_floor_right_mid_centre)
-        back_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Back_Left_Mid_Joint",
+                                           centre = front_floor_right_third_centre)
+        back_left_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Left_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = back_seat_left_mid_centre)
-        back_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Back_Right_Mid_Joint",
+                                           centre = back_seat_left_third_centre)
+        back_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Back_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 180),
-                                           centre = back_seat_right_mid_centre)
+                                           centre = back_seat_right_third_centre)
 
 
 
@@ -513,10 +513,10 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
                       floor_panel,
                       seat_panel,
                       side_panel,
-                      front_left_mid_joint.fitting,
-                      front_right_mid_joint.fitting,
-                      back_left_mid_joint.fitting,
-                      back_right_mid_joint.fitting]
+                      front_left_third_joint.fitting,
+                      front_right_third_joint.fitting,
+                      back_left_third_joint.fitting,
+                      back_right_third_joint.fitting]
         
         # Create compound
         structure = freecad_document.addObject("App::Part", structure_label)
@@ -548,28 +548,28 @@ class Cabin_Back(Structure):
 
         # Make joints
 
-        roof_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Roof_Left_Mid_Joint",
+        roof_Left_Third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_left_third_Joint",
                                            rotation = App.Rotation(0, 0, 0),
-                                           centre = back_roof_left_mid_centre)
-        roof_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Roof_Right_Mid_Joint",
+                                           centre = back_roof_left_third_centre)
+        roof_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 0),
-                                           centre = back_roof_right_mid_centre)
+                                           centre = back_roof_right_third_centre)
 
         # Make poles
 
         pole_offset = App.Vector(0, 0, pole_radius)
 
-        left_mid_pole_start = back_seat_left_mid_centre + pole_offset
-        left_mid_pole_end = back_roof_left_mid_centre - pole_offset
-        left_mid_pole_line = Draft.make_line(left_mid_pole_start, left_mid_pole_end)
-        left_mid_pole = make_pole(left_mid_pole_line, "Left_Mid_Pole")
+        left_third_pole_start = back_seat_left_third_centre + pole_offset
+        left_third_pole_end = back_roof_left_third_centre - pole_offset
+        left_third_pole_line = Draft.make_line(left_third_pole_start, left_third_pole_end)
+        left_third_pole = make_pole(left_third_pole_line, "Left_Third_Pole")
 
-        right_mid_pole_start = back_seat_right_mid_centre + pole_offset
-        right_mid_pole_end = back_roof_right_mid_centre - pole_offset
-        right_mid_pole_line = Draft.make_line(right_mid_pole_start, right_mid_pole_end)
-        right_mid_pole = make_pole(right_mid_pole_line, "Right_Mid_Pole")
+        right_third_pole_start = back_seat_right_third_centre + pole_offset
+        right_third_pole_end = back_roof_right_third_centre - pole_offset
+        right_third_pole_line = Draft.make_line(right_third_pole_start, right_third_pole_end)
+        right_third_pole = make_pole(right_third_pole_line, "Right_Third_Pole")
 
         # Make Board
         board_start_z = seat_z + pole_radius + floor_board_thickness
@@ -577,7 +577,7 @@ class Cabin_Back(Structure):
                                               wall_top_z - 
                                               board_start_z)
         back_panel = Arch.makePanel(back_panel_rect, 
-                                    thickness = side_panel_board_thickness)
+                                    thickness = other_board_thickness)
         back_panel.Label = "Back_Panel"
         back_panel.Placement = App.Placement(
                 App.Vector(0, 0, 0),
@@ -590,10 +590,10 @@ class Cabin_Back(Structure):
         # TODO: Add fixings for boards
 
         # Create a parts list
-        parts_list = [roof_left_mid_joint.fitting,
-                      roof_right_mid_joint.fitting,
-                      left_mid_pole,
-                      right_mid_pole,
+        parts_list = [roof_Left_Third_joint.fitting,
+                      roof_right_third_joint.fitting,
+                      left_third_pole,
+                      right_third_pole,
                       back_panel]
         
         super().__init__(freecad_document,
@@ -613,7 +613,7 @@ class Urinal_Back(Structure):
                 structure_label,
                 rotation = App.Rotation(0,0,0),
                 centre = App.Vector(0,0,0)):
-        """ Constructs a Urinal_Back in the freecad_document, with label attribute
+        """ Constructs a Urinal Back in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
 
@@ -622,28 +622,28 @@ class Urinal_Back(Structure):
 
         # Make joints
 
-        roof_left_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Roof_Left_Mid_Joint",
+        roof_left_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Left_Third_Joint",
                                            rotation = App.Rotation(0, 0, 0),
-                                           centre = back_roof_left_mid_centre)
-        roof_right_mid_joint  = Short_T(freecad_document = freecad_document,
-                                           fitting_label = "Roof_Right_Mid_Joint",
+                                           centre = back_roof_left_third_centre)
+        roof_right_third_joint  = Short_T(freecad_document = freecad_document,
+                                           fitting_label = "Roof_Right_Third_Joint",
                                            rotation = App.Rotation(0, 0, 0),
-                                           centre = back_roof_right_mid_centre)
+                                           centre = back_roof_right_third_centre)
 
         # Make poles
 
         pole_offset = App.Vector(0, 0, pole_radius)
 
-        left_mid_pole_start = back_floor_left_mid_centre + pole_offset
-        left_mid_pole_end = back_roof_left_mid_centre - pole_offset
-        left_mid_pole_line = Draft.make_line(left_mid_pole_start, left_mid_pole_end)
-        left_mid_pole = make_pole(left_mid_pole_line, "Left_Mid_Pole")
+        left_third_pole_start = back_floor_left_third_centre + pole_offset
+        left_third_pole_end = back_roof_left_third_centre - pole_offset
+        left_third_pole_line = Draft.make_line(left_third_pole_start, left_third_pole_end)
+        left_third_pole = make_pole(left_third_pole_line, "Left_Third_Pole")
 
-        right_mid_pole_start = back_floor_right_mid_centre + pole_offset
-        right_mid_pole_end = back_roof_right_mid_centre - pole_offset
-        right_mid_pole_line = Draft.make_line(right_mid_pole_start, right_mid_pole_end)
-        right_mid_pole = make_pole(right_mid_pole_line, "Right_Mid_Pole")
+        right_third_pole_start = back_floor_right_third_centre + pole_offset
+        right_third_pole_end = back_roof_right_third_centre - pole_offset
+        right_third_pole_line = Draft.make_line(right_third_pole_start, right_third_pole_end)
+        right_third_pole = make_pole(right_third_pole_line, "Right_Third_Pole")
 
         # Make Board
         board_start_z = floor_z + pole_radius + floor_board_thickness
@@ -651,7 +651,7 @@ class Urinal_Back(Structure):
                                               wall_top_z - 
                                               board_start_z)
         back_panel = Arch.makePanel(back_panel_rect, 
-                                    thickness = side_panel_board_thickness)
+                                    thickness = other_board_thickness)
         back_panel.Label = "Back_Panel"
         back_panel.Placement = App.Placement(
                 App.Vector(0, 0, 0),
@@ -664,10 +664,10 @@ class Urinal_Back(Structure):
         # TODO: Add fixings for boards
 
         # Create a parts list
-        parts_list = [roof_left_mid_joint.fitting,
-                      roof_right_mid_joint.fitting,
-                      left_mid_pole,
-                      right_mid_pole,
+        parts_list = [roof_left_third_joint.fitting,
+                      roof_right_third_joint.fitting,
+                      left_third_pole,
+                      right_third_pole,
                       back_panel]
         
         super().__init__(freecad_document,
@@ -675,4 +675,76 @@ class Urinal_Back(Structure):
                         rotation,
                         centre,
                         parts_list)
+        
+
+        
+class Cabin_Partition(Structure):
+    """ A class representing a Cabin Partition structure used as part of
+    a composting toilet project."""
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Cabin Partition in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        # Make joint
+
+        roof_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Roof_Joint",
+                                rotation = App.Rotation(0, 0, 0),
+                                centre = roof_front_centre)
+
+
+        # Make pole
+
+        pole_offset = App.Vector(0, 0, pole_radius)
+
+        pole_start = floor_front_centre + pole_offset
+        pole_end = roof_front_centre - pole_offset
+        pole_line = Draft.make_line(pole_start, pole_end)
+        pole = make_pole(pole_line, "Pole")
+
+        # Make Board
+        board_start_z = floor_z + joint_radius + floor_board_thickness
+        panel_width = board_width - pole_radius - joint_radius - other_board_thickness
+        panel_rect = Draft.makeRectangle(wall_top_z - 
+                                        board_start_z,
+                                        panel_width)
+        panel = Arch.makePanel(panel_rect, 
+                                    thickness = side_panel_board_thickness)
+        panel.Label = "Panel"
+        cutout_height = seat_z - floor_z
+        cutout_width = Cabin_Back.board_start_y - Cabin_Floor.seat_start_y
+        cutout_rect = Draft.makeRectangle(cutout_height, cutout_width)
+        cutout = Arch.makePanel(cutout_rect, 
+                                thickness = side_panel_board_thickness)
+        Draft.move(cutout, App.Vector(0, panel_width - cutout_width, 0))
+        panel = Draft.cut(panel, cutout)
+        panel.Placement = App.Placement(
+                App.Vector(0, 0, 0),
+                App.Rotation(0, 270, 0),
+                App.Vector(0, 0, 0))
+        Draft.move(panel, App.Vector(side_panel_board_thickness / 2,
+                                     pole_radius,
+                                     board_start_z))
+
+        # TODO: Add fixings for boards
+
+        # Create a parts list
+        parts_list = [roof_joint.fitting,
+                      pole,
+                      panel]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        centre,
+                        parts_list)
+        
+
+
 
