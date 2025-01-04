@@ -37,10 +37,10 @@ The primary design approach is to construct scaffolding based interchangeable co
 - Composting Toilet Cabins
 - Urinals
 
-The approach is illustrated in this partially constructed model which has a urinal floor on the left hand side and a toilet cabin floor on the right hand side. Each cabin floor section can fit 3 individual cabins.:
+The approach is illustrated in this partially constructed model:
 
 <p align="center">
-    <img src="images/modular_design.png" alt="Image of three side panels structure. The first and second seperated by a urinal floor structure and the second and third seperated by cabin ground and cabin floor structures.">
+    <img src="images/modular_design.png" alt="Image of four side panel structure. These are used to construct, from left to right, a composting cabin a urinal and then another composting cabin.">
 </p>
 
 The components are constructed once and stored whole to enable easy set up and strike. The components are as follows:

@@ -19,7 +19,7 @@ class Structure:
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0),
+                location = App.Vector(0,0,0),
                 parts_list = []):
         """ Constructs a Structure in the freecad_document, from the parts
         given in the parts_list parameter, with label attribute  given by
@@ -33,10 +33,10 @@ class Structure:
         # # Rotate
         structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
         # Move
-        Draft.move(structure, centre)
+        Draft.move(structure, location)
         self.structure = structure
 
-class Side_Panel: # TODO: Refactor to inherit from Structure Class
+class Side_Panel(Structure):
     """ A class representing a modular side panel used in constructing
     composting toilets. The panel can be used on both left and right
     and can be configured with either a urinal floor or a sit down toilet floor."""
@@ -45,7 +45,7 @@ class Side_Panel: # TODO: Refactor to inherit from Structure Class
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Side Panel in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -230,20 +230,13 @@ class Side_Panel: # TODO: Refactor to inherit from Structure Class
                        ground_back_cross,
                        panel_1]
         
-        # Create part
-        structure = freecad_document.addObject("App::Part", structure_label)
-        structure.addObjects(parts_list)
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
 
-        # Postion the structure corectly.
-        ##############################
-
-        # Rotate
-        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-        # Move
-        Draft.move(structure, centre)
-        self.structure = structure
-
-class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
+class Urinal_Floor(Structure):
     """ A class representing a Urinal Floor that would 
     form part of a set of composting toilet blocks."""
     
@@ -252,7 +245,7 @@ class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Urinal Floor in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -328,19 +321,15 @@ class Urinal_Floor: # TODO: Refactor to inherit from Structure Class
                       back_left_third_joint.fitting,
                       back_right_third_joint.fitting]
         
-        # Create compound
-        structure = freecad_document.addObject("App::Part", structure_label)
-        structure.addObjects(parts_list)
-
-        # # Rotate
-        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-        # Move
-        Draft.move(structure, centre)
-        self.structure = structure
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
 
 
 
-class Cabin_Ground: # TODO: Refactor to inherit from Structure Class
+class Cabin_Ground(Structure):
     """ A class representing a Cabin Ground structure used as part of
     a composting toilet project. The solid waste container sits
     snugly between the Cabin Ground and the toilet seat that is
@@ -352,7 +341,7 @@ class Cabin_Ground: # TODO: Refactor to inherit from Structure Class
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Cabin_Ground in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -391,18 +380,14 @@ class Cabin_Ground: # TODO: Refactor to inherit from Structure Class
                       back_pole,
                       floor_panel]
         
-        # Create compound
-        structure = freecad_document.addObject("App::Part", structure_label)
-        structure.addObjects(parts_list)
-
-        # # Rotate
-        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-        # Move
-        Draft.move(structure, centre)
-        self.structure = structure
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
 
 
-class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
+class Cabin_Floor(Structure):
     """ A class representing a Cabin Floor that would 
     form part of a set of composting toilet blocks."""
 
@@ -412,7 +397,7 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Cabin Floor in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -518,15 +503,11 @@ class Cabin_Floor: # TODO: Refactor to inherit from Structure Class
                       back_left_third_joint.fitting,
                       back_right_third_joint.fitting]
         
-        # Create compound
-        structure = freecad_document.addObject("App::Part", structure_label)
-        structure.addObjects(parts_list)
-
-        # # Rotate
-        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
-        # Move
-        Draft.move(structure, centre)
-        self.structure = structure
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
 
 class Cabin_Back(Structure):
     """ A class representing a Cabin Back structure used as part of
@@ -538,7 +519,7 @@ class Cabin_Back(Structure):
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Cabin_Back in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -599,7 +580,7 @@ class Cabin_Back(Structure):
         super().__init__(freecad_document,
                         structure_label,
                         rotation,
-                        centre,
+                        location,
                         parts_list)
         
 class Urinal_Back(Structure):
@@ -612,7 +593,7 @@ class Urinal_Back(Structure):
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Urinal Back in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -673,7 +654,7 @@ class Urinal_Back(Structure):
         super().__init__(freecad_document,
                         structure_label,
                         rotation,
-                        centre,
+                        location,
                         parts_list)
         
 
@@ -686,7 +667,7 @@ class Cabin_Partition(Structure):
                 freecad_document,
                 structure_label,
                 rotation = App.Rotation(0,0,0),
-                centre = App.Vector(0,0,0)):
+                location = App.Vector(0,0,0)):
         """ Constructs a Cabin Partition in the freecad_document, with label attribute
         given by parameter structure_label and centre and rotation given by the
         corresponding parameters.  """
@@ -742,7 +723,7 @@ class Cabin_Partition(Structure):
         super().__init__(freecad_document,
                         structure_label,
                         rotation,
-                        centre,
+                        location,
                         parts_list)
         
 
