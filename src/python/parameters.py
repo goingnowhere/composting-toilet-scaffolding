@@ -57,10 +57,16 @@ side_panel_seperation_x = board_length + side_panel_board_thickness
 # In the x direction there are 3 key equadistant planes
 # The plane for the left side panel joints.
 left_x = 0
-# The plane for the mid left floor and roof joints.
+# The plane for joints 1/4 way along the structure
+left_quarter_x = side_panel_seperation_x / 4
+# The plane for joints 1/3 way along the structure
 left_third_x = side_panel_seperation_x / 3
-# The plane for the mid right floor and roof joints.
+# The plane for joints 1/2 way along the structure
+middle_x = side_panel_seperation_x / 2
+# The plane for joints 2/3 way along the structure.
 right_third_x = side_panel_seperation_x * 2 / 3
+# The plane for joints 3/4 way along the structure.
+right_quarter_x = side_panel_seperation_x * 3 / 4
 # The plane for the right side panel joints. # TODO: Review if this is used.
 right_x = side_panel_seperation_x
 
@@ -121,8 +127,8 @@ roof_front_centre = App.Vector(0, front_y, front_roof_z)
 roof_back_centre = App.Vector(0, back_y, back_roof_z)
 
 
-# Centre Vectors for Floor and Roof Joints
-##########################################
+# Third Vectors for Floors, Backs, Cabin Panels and Urinal Fronts 
+#################################################################
 
 # Front Joints
 front_floor_left_third_centre = App.Vector(left_third_x, front_y, floor_z)
@@ -137,3 +143,16 @@ back_seat_left_third_centre = App.Vector(left_third_x, back_y, seat_support_z)
 back_seat_right_third_centre = App.Vector(right_third_x, back_y, seat_support_z)
 back_roof_left_third_centre = App.Vector(left_third_x, back_y, back_roof_z)
 back_roof_right_third_centre = App.Vector(right_third_x, back_y, back_roof_z)
+
+# Quarter Vectors for Roofs 
+###########################
+
+# Front Joints
+front_roof_left_quarter_centre = App.Vector(left_quarter_x, front_y, front_roof_z)
+front_roof_middle_centre = App.Vector(middle_x, front_y, front_roof_z)
+front_roof_right_quarter_centre = App.Vector(right_quarter_x, front_y, front_roof_z)
+
+# Back Joints
+back_roof_left_quarter_centre = App.Vector(left_quarter_x, back_y, back_roof_z)
+back_roof_middle_centre = App.Vector(middle_x, back_y, back_roof_z)
+back_roof_right_quarter_centre = App.Vector(right_quarter_x, back_y, back_roof_z)

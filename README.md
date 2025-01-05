@@ -105,26 +105,33 @@ For the composting cabin the liquid waste is separated at the toilet. This enabl
 ## Design Tools
 
 The files contained in this repository primarily deal with the design of the
-structure. They consist of a set of python files in directory /src/python
-scriptswith extension ".py". There two sorts of python files:
+structure. They consist of a set of python files which can be identified by the extension .py. There two sorts of python files:
 
 - **Macro files** - These are files that are used to generate 3d models in the
 open source software [FreeCAD](https://www.freecad.org/). To use FreeCAD to
 generate the models use the Freecad menu Macro > Macros to navigate to the
-file you wish to use. The FreeCAD version used for this project is 0.21.2.
-Currently the following Macro files have been created:
+file you wish to use. The FreeCAD version used for this project is 0.21.2. NOTE you may need to use the menu View > Standard views > Fit all to make the structure or fitting appear in FreeCADs view pane. Currently the following Macro files have been created:
 
-    - XXX_simple.py - Draws a fiting or structure of type XXX.
-    - XXX_test.py - Tests all the use of the XXX fitting or structure in the
-    - context of other components.
+    - In directory /src/python/structure_macros
+        - structure_test.py which draws the all structures ensuring that they fit 
+        together correctly
+        = STRUCTURE_NAME.py that draws the individualstructure corresponding
+        to the structure name.
+    - In directory /src/python/fittings_macros
+        - XXX_simple.py - Draws a fitting of type XXX.
+        - XXX_test.py - Tests all the use of the XXX fitting in various rotations
+        connecting to pipes and/or panels.
 
-- **Support Files** - These define the key parameters, fittings and structure classes used to build composting toilet models:
+- **Definition Files** - These define the key parameters, fittings and structure classes used to build composting toilet models. They are contained in the directory
+/src/python:
  
     - parameters.py - contains key parameters upon which the design is based.
     For example seat_height_from_ground specifies the height in millimeters
     that the toilet seat needs to above the ground.
-    - fittings.py - contains classes used to create scaffolding fittings.
-    - structures.py contains the class to generate different structures taht are combined to create a composting toilet for eaxmple the modular Side Panel
+    - fittings.py - contains classes used to create scaffolding fittings. For example
+    the Four Way Cross joint.
+    - structures.py contains the class to generate different structures that are combined
+    to create a composting toilet. For eaxmple the modular Side Panel
 
 
 ## Appendix: Scafolding Joint Components
