@@ -5,6 +5,7 @@
 import FreeCAD as App
 import Arch
 import Draft
+import math
 from BasicShapes import Shapes
 from parameters import *
 from fittings import *
@@ -657,8 +658,6 @@ class Urinal_Back(Structure):
                         location,
                         parts_list)
         
-
-        
 class Cabin_Partition(Structure):
     """ A class representing a Cabin Partition structure used as part of
     a composting toilet project."""
@@ -727,5 +726,180 @@ class Cabin_Partition(Structure):
                         parts_list)
         
 
+       
+class Roof(Structure):
+    """ A class representing a Roof structure used as part of
+    a composting toilet project."""
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                location = App.Vector(0,0,0)):
+        """ Constructs a Roof in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
 
+        # Calculate angles and pole offset vectors
+        opposite_side = front_roof_z - back_roof_z
+        adjacent_side = board_width
+        pitch_angle_radians = math.atan(opposite_side/adjacent_side)
+        pitch_angle_degrees = math.degrees(pitch_angle_radians)
+        down_angle = - pitch_angle_degrees + 90
+        up_angle = - pitch_angle_degrees + 270
+        # So to to find how much the y and z are scaled for a unit length
+        # y^2 + z^2 = 1^2 and ....1 (Pythagoras Theorem)
+        # If we define
+        # y_z_ratio = y/z  ....2
+        # WhereThen for this case:
+        y_z_ratio = adjacent_side / opposite_side
+        # From 2. y = z * y_z_ratio  ....3
+        # So from 1. (z * y_z_ratio)^2 + z^2 = 1
+        # So z^2*(y_Z_ratio^2 + 1) = 1
+        # So
+        scale_z = 1 / math.sqrt(y_z_ratio**2 + 1)
+        # From 3.
+        scale_y = scale_z * y_z_ratio
+        pole_offset = pole_radius * App.Vector(0, scale_y, -scale_z)
+
+        # Make joints
+        front_left_quarter_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Front_Left_Quarter_Joint",
+                                rotation = App.Rotation(0, 0, down_angle),
+                                centre = front_roof_left_quarter_centre)
+        front_middle_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Front_Middle_Joint",
+                                rotation = App.Rotation(0, 0, down_angle),
+                                centre = front_roof_middle_centre)
+        front_right_quarter_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Front Right_Quarter_Joint",
+                                rotation = App.Rotation(0, 0, down_angle),
+                                centre = front_roof_right_quarter_centre)
+        
+
+        back_left_quarter_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Back_Left_Quarter_Joint",
+                                rotation = App.Rotation(0, 0, up_angle),
+                                centre = back_roof_left_quarter_centre)
+        back_middle_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Back_Middle_Joint",
+                                rotation = App.Rotation(0, 0, up_angle),
+                                centre = back_roof_middle_centre)
+        back_right_quarter_joint  = Short_T(freecad_document = freecad_document,
+                                fitting_label = "Back_Right_Quarter_Joint",
+                                rotation = App.Rotation(0, 0, up_angle),
+                                centre = back_roof_right_quarter_centre)
+
+
+        # Make poles
+
+        left_quarter_pole_start = front_roof_left_quarter_centre + pole_offset
+        left_quarter_pole_end = back_roof_left_quarter_centre - pole_offset
+        left_quarter_pole_line = Draft.make_line(left_quarter_pole_start, left_quarter_pole_end)
+        left_quarter_pole = make_pole(left_quarter_pole_line, "Left_Quarter_Pole")
+        
+        middle_pole_start = front_roof_middle_centre + pole_offset
+        middle_pole_end = back_roof_middle_centre - pole_offset
+        middle_pole_line = Draft.make_line(middle_pole_start, middle_pole_end)
+        middle_pole = make_pole(middle_pole_line, "Middle_Pole")
+
+        right_quarter_pole_start = front_roof_right_quarter_centre + pole_offset
+        right_quarter_pole_end = back_roof_right_quarter_centre - pole_offset
+        right_quarter_pole_line = Draft.make_line(right_quarter_pole_start, right_quarter_pole_end)
+        right_quarter_pole = make_pole(right_quarter_pole_line, "Right_Quarter_Pole")
+
+        # # Make Board
+        board_start_y = -roof_overlap * scale_y
+        board_start_z = front_roof_z + (roof_overlap * scale_z) + joint_radius
+
+        panel_width = board_width + roof_overlap * 2
+        panel_rect = Draft.makeRectangle(board_length,
+                                        panel_width)
+        panel = Arch.makePanel(panel_rect, 
+                                    thickness = side_panel_board_thickness)
+        panel.Label = "Panel"
+        panel.Placement = App.Placement(
+                App.Vector(0, 0, 0),
+                App.Rotation(0, 0, -pitch_angle_degrees),
+                App.Vector(0, 0, 0))
+        Draft.move(panel, App.Vector(0,
+                                     board_start_y,
+                                     board_start_z))
+
+        # TODO: Add fixings for boards
+
+        # Create a parts list
+        parts_list = [front_left_quarter_joint.fitting,
+                      front_middle_joint.fitting,
+                      front_right_quarter_joint.fitting,
+                      back_left_quarter_joint.fitting,
+                      back_middle_joint.fitting,
+                      back_right_quarter_joint.fitting,
+                      left_quarter_pole,
+                      middle_pole,
+                      right_quarter_pole,
+                      panel]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
+        
+class Front_Roof_Pole(Structure):
+    """ A class representing a Front Roof Pole structure used as part of
+    a composting toilet project."""
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                location = App.Vector(0,0,0)):
+        """ Constructs a Front Roof Pole in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        # Make pole
+        pole_start = roof_front_centre
+        pole_end = front_roof_right_centre
+        pole_line = Draft.make_line(pole_start, pole_end)
+        pole = make_pole(pole_line, "Pole")
+
+        # Create a parts list
+        parts_list = [pole]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
+        
+class Back_Roof_Pole(Structure):
+    """ A class representing a Back Roof Pole structure used as part of
+    a composting toilet project."""
+    
+    def __init__(self,
+                freecad_document,
+                structure_label,
+                rotation = App.Rotation(0,0,0),
+                location = App.Vector(0,0,0)):
+        """ Constructs a Back Roof Pole in the freecad_document, with label attribute
+        given by parameter structure_label and centre and rotation given by the
+        corresponding parameters.  """
+
+        # Make pole
+        pole_start = roof_back_centre
+        pole_end = back_roof_right_centre
+        pole_line = Draft.make_line(pole_start, pole_end)
+        pole = make_pole(pole_line, "Pole")
+
+        # Create a parts list
+        parts_list = [pole]
+        
+        super().__init__(freecad_document,
+                        structure_label,
+                        rotation,
+                        location,
+                        parts_list)
+        
 

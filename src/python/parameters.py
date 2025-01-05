@@ -33,7 +33,9 @@ back_roof_height_from_floor = 2000 # The distance from the floor to the roof at 
 front_roof_height_from_floor = 2200 # The distance from the floor to the roof at the front of the structure.
 wall_height_from_floor = 1900 # The distance from the floor and the top of the walls.
 max_pole_underground = 500 # The maximum amount the poles will be sunk into the ground. Note on a slope only the higest points would be sunk in that much.
-# TODO Check if this is used
+# The amount  added to each side of a traditional board width for the roof.
+roof_overlap = 200
+# TODO Check if the following is used is used
 board_overlap = 12 # The amount the boards are routed to overlap the scafolding pole. This should be a circular rout matching the diameter of the scaffolding pole as far as possible
 
 
@@ -135,6 +137,7 @@ front_floor_left_third_centre = App.Vector(left_third_x, front_y, floor_z)
 front_floor_right_third_centre = App.Vector(right_third_x, front_y, floor_z)
 front_roof_left_third_centre = App.Vector(left_third_x, front_y, front_roof_z)
 front_roof_right_third_centre = App.Vector(right_third_x, front_y, front_roof_z)
+front_roof_right_centre = App.Vector(right_x, front_y, front_roof_z)
 
 # Back Joints
 back_floor_left_third_centre = App.Vector(left_third_x, back_y, floor_z)
@@ -143,6 +146,7 @@ back_seat_left_third_centre = App.Vector(left_third_x, back_y, seat_support_z)
 back_seat_right_third_centre = App.Vector(right_third_x, back_y, seat_support_z)
 back_roof_left_third_centre = App.Vector(left_third_x, back_y, back_roof_z)
 back_roof_right_third_centre = App.Vector(right_third_x, back_y, back_roof_z)
+back_roof_right_centre = App.Vector(right_x, back_y, back_roof_z)
 
 # Quarter Vectors for Roofs 
 ###########################

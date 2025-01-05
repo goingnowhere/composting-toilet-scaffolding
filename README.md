@@ -32,10 +32,12 @@ A [spreadsheet](https://docs.google.com/spreadsheets/d/10gVWtJp33p0cb3BE8hLPdwHn
 
 ## Scaffolding Approach
 
-The primary design approach is to construct scaffolding based interchangeable component structures that are easily connected together to create either:
+The primary design approach is to constructinterchangeable component structures that are easily connected together to create either:
 
 - Composting Toilet Cabins
 - Urinals
+
+These structures are scaffolding based and are formed from plywood panels, scaffolding poles and scaffolding fittings.
 
 The approach is illustrated in this partially constructed model:
 
@@ -43,7 +45,7 @@ The approach is illustrated in this partially constructed model:
     <img src="images/modular_design.png" alt="Image of four side panel structure. These are used to construct, from left to right, a composting cabin a urinal and then another composting cabin.">
 </p>
 
-The components are constructed once and stored whole to enable easy set up and strike. The components are as follows:
+The  structures are constructed once and stored whole to enable easy set up and strike. The component strcutures are as follows:
 
 - **Side Panel** This is modular panel that is the key to construction. It´s poles are embedded into the ground using holes dug by a power auger. This provides stability, wind resistance and enables the structure to be placed on unlevel ground. It has extensive joints that set the correct distances for all other components. It is symetric so that it can be used as the left, right or center panel of any construction.
 
@@ -87,9 +89,15 @@ The components are constructed once and stored whole to enable easy set up and s
     <img src="images/cabin_partition.png" alt="A Cabin Partition Structure">
 </p>
 
+
+- **Roof** This is a plywood based panel attached to poles and fittings. It is raised to the top of the structure after Back structures  and either Cabin Paertitions or Urinal fronts have been fitted. Front and rear scaffolding poles are then slid through the joints and all joints tightened.
+
+<p align="center">
+    <img src="images/roof.png" alt="A Roof Structure">
+</p>
+
 - **Cabin Door** These are a plywood and scaffolding construction that attached via simple hinges to side panels or cabin partitions.
 - **Urinal Front** These are plywood and scafolding constructions that provide privacy to the urinals. They are slotted into the fixings at the front of the Urinal Floor then fixed at the top to a pole that is slid through the Panel Sides at roof height, fixing the front of the roof at the same time. They are also fixed to the panel sides. There are 2 for each urinal block.
-- **Roof** This is a plywood based panel attached to poles and fittings. It is fixed back to fixings added when fixing cabin or urinal rears. It is fixed at the front by means of poles slid through side panels. The front fixing is done at the same time as Cabin or Urinal Front. It is the step conducted after fixing the rear components.
 - **Cabin Steps** This is a folding plywood and scafoliding construction that unfolds and fixes to the Cabin Floor. They run the entire length of the cabin.
 - **Urinal Steps** This is a folding plywood and scafoliding construction that unfolds and fixes to the Urinal Floor. They sit in the center of the urinal cabin between the two urinal fronts.
 
@@ -108,18 +116,15 @@ The files contained in this repository primarily deal with the design of the
 structure. They consist of a set of python files which can be identified by the extension .py. There two sorts of python files:
 
 - **Macro files** - These are files that are used to generate 3d models in the
-open source software [FreeCAD](https://www.freecad.org/). To use FreeCAD to
-generate the models use the Freecad menu Macro > Macros to navigate to the
-file you wish to use. The FreeCAD version used for this project is 0.21.2. NOTE you may need to use the menu View > Standard views > Fit all to make the structure or fitting appear in FreeCADs view pane. Currently the following Macro files have been created:
-
-    - In directory /src/python/structure_macros
+open source software [FreeCAD](https://www.freecad.org/). See section below about using these macros in FreeCAD. Macro files are located as follows:
+    - In directory /src/python
         - structure_test.py which draws the all structures ensuring that they fit 
         together correctly
-        = STRUCTURE_NAME.py that draws the individualstructure corresponding
-        to the structure name.
+        = macro_STRUCTURE_NAME.py that draws the individual structure corresponding
+        to the STRUCTURE_NAME.
     - In directory /src/python/fittings_macros
         - XXX_simple.py - Draws a fitting of type XXX.
-        - XXX_test.py - Tests all the use of the XXX fitting in various rotations
+        - XXX_test.py - Tests the use of the XXX fitting in various rotations and
         connecting to pipes and/or panels.
 
 - **Definition Files** - These define the key parameters, fittings and structure classes used to build composting toilet models. They are contained in the directory
@@ -132,6 +137,22 @@ file you wish to use. The FreeCAD version used for this project is 0.21.2. NOTE 
     the Four Way Cross joint.
     - structures.py contains the class to generate different structures that are combined
     to create a composting toilet. For eaxmple the modular Side Panel
+
+### Running Macro Files in FreeCAD
+
+The structure macro files can be executed in freecad in order to explore the models in 3 dimensions. To execute the files use the menu Macro > Macros... to set the User Macro directory in FreeCAD to /src/python. Once this is done you may need to close and reopen FreeCAD before a macro executes directly. You also may need to use the menu View > Standard views > Fit all to make the structure appear in FreeCADs view pane. Note the more complicated the structure the longer the macro will take to execute.
+
+Fittings macros are kept in a sub directory to keep the file system clean. This means that they will not run correctly as they depend on the file fittings.py. The work around for this is as follows:
+
+1. Open freecad with the User Macro Directory set to /src/python
+2. Execute the file fittings.py
+3. use the menu Macro > Macros... to hange the User Macro Directory to "/src/python/fittings" and execute the desired macro.
+
+### Accessing and Editing the files.
+
+The files are contained in the GitHub repository here: https://github.com/goingnowhere/composting-toilet-scaffolding. 
+
+The files have been developed within the Visual Studio Code IDE.
 
 
 ## Appendix: Scafolding Joint Components
