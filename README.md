@@ -45,7 +45,7 @@ The approach is illustrated in this partially constructed model:
     <img src="images/modular_design.png" alt="Image of four side panel structure. These are used to construct, from left to right, a composting cabin a urinal and then another composting cabin.">
 </p>
 
-The  structures are constructed once and stored whole to enable easy set up and strike. The component strcutures are as follows:
+The  structures are constructed once and stored whole to enable easy set up and strike. The component structures are as follows:
 
 - **Side Panel** This is modular panel that is the key to construction. It´s poles are embedded into the ground using holes dug by a power auger. This provides stability, wind resistance and enables the structure to be placed on unlevel ground. It has extensive joints that set the correct distances for all other components. It is symetric so that it can be used as the left, right or center panel of any construction.
 
@@ -146,7 +146,7 @@ Fittings macros are kept in a sub directory to keep the file system clean. This 
 
 1. Open freecad with the User Macro Directory set to /src/python
 2. Execute the file fittings.py
-3. use the menu Macro > Macros... to hange the User Macro Directory to "/src/python/fittings" and execute the desired macro.
+3. use the menu Macro > Macros... to change the User Macro Directory to "/src/python/fittings" and execute the desired macro. Don´t forget to change this directory back when you want to run sturucture macros.
 
 ### Accessing and Editing the files.
 
@@ -170,6 +170,7 @@ These are listed below:
 - [Double Sided Collar](https://pipedreamfittings.com/product/double-sided-collar-plate-90-48mm-d48-2/). Used to attach plywood panels to scafolding. Can handle boards of greater than 10mm thickness.
 - [Double Fixing Pad](https://pipedreamfittings.com/product/double-fixing-pad-48mm-d48/). Used to attach plywood panels to scafolding. Can handle boards of greater than 10mm thickness.
 - [Rightangle Crossover](https://pipedreamfittings.com/product/90-crossover-48mm-d48/). Used as slots for rear and front sections.
+- [Elbow 90 Degrees](https://pipedreamfittings.com/product/elbow-90-degree-48mm-key-clamp-fitting/) Used to make  cabin doors.
 - [Locking Collar](https://pipedreamfittings.com/product/locking-collar-48mm-d48/). Used with slots for rear and front sections.
 - [Galvenised End Cap](https://pipedreamfittings.com/product/galvanised-end-cap-48mm/). Used to cap ends of pipes that slot into the ground.
 - [Gate Eye](https://pipedreamfittings.com/product/gate-eye-48mm-d48/). Could possibly be used for cabin doors. Maybe an issue with symetry

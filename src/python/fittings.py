@@ -22,6 +22,35 @@ def make_pole(line, name):
     pole.Label = name
     return pole
 
+
+class Fitting:
+    """ A class representing a generic component fitting. It should 
+    be subclassed by all component fi.tings Subclasses should create
+    a list of parts and then call the class constructor with that list."""
+    
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0),
+                parts_list = []):
+        """ Constructs a Fitting in the freecad_document, from the parts
+        given in the parts_list parameter, with label attribute  given by
+        parameter fitting_label and centre and rotation given by the
+        corresponding parameters.  """
+        
+        # Create structure
+        structure = freecad_document.addObject("App::Part", fitting_label)
+        structure.addObjects(parts_list)
+
+        # # Rotate
+        structure.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
+        # Move
+        Draft.move(structure, centre)
+        self.structure = structure
+
+
 class Side_Outlet_T:
     """ A class representing a Side Outlet T fitting for standard 48,3 scaffolding
      This is a model of the following fitting:
@@ -439,3 +468,44 @@ class Two_Socket_Cross:
         self.fitting.Placement = App.Placement(App.Vector(0,0,0), rotation, App.Vector(0,0,0))
         # Move
         Draft.move(self.fitting, centre)
+
+
+class Elbow_90_Degrees(Fitting):
+    """ A class representing a 90 Degree Elbow object for standard 48,3 scaffolding
+     This is a model of the following fitting:
+    https://pipedreamfittings.com/product/elbow-90-degree-48mm-key-clamp-fitting/"""
+    
+    distance_from_centre = 68
+    
+    def __init__(self,
+                freecad_document,
+                fitting_label,
+                rotation = App.Rotation(0,0,0),
+                centre = App.Vector(0,0,0)):
+        """ Constructs a Elbow 90 Degrees in the freecad_document, with label attribute
+        given by parameter fitting_label and centre and rotation given by the
+        corresponding parameters.  """
+        # Strategy create a wire then draw the pipe along the wire
+        distance_from_centre = Elbow_90_Degrees.distance_from_centre
+        # Create wire
+        t_centre = App.Vector(0,0,0)
+        t_across_end = App.Vector(distance_from_centre,0,0)
+        t_down_start = App.Vector(0, 0, -distance_from_centre)
+        elbow_line = Draft.make_wire([t_down_start,t_centre, t_across_end])
+        # Draw solid sections
+        t_elbow = Arch.makePipe(elbow_line, diameter=joint_diameter)
+        t_elbow.WallThickness = joint_wall_thickness
+        t_elbow.Label = "T_Elbow"
+        
+        # Create a part containing all objects
+        ######################################
+
+        # Creat Parts List
+        parts_list =[t_elbow]
+
+        # Call superclass
+        super().__init__(freecad_document,
+                fitting_label,
+                rotation,
+                centre,
+                parts_list)
